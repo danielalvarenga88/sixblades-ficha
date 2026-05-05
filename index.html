@@ -476,6 +476,53 @@
   /* Calendar grad marker */
   .cal-grad-marker{position:absolute;top:2px;left:3px;font-size:9px;line-height:1}
 
+
+  /* GRAD CONFIRM MODAL */
+  #grad-modal-overlay{
+    position:fixed;inset:0;z-index:960;
+    background:rgba(0,0,0,0.75);
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+    opacity:0;pointer-events:none;transition:opacity 0.2s;
+  }
+  #grad-modal-overlay.open{opacity:1;pointer-events:all}
+  #grad-modal-box{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:16px;padding:24px 22px;width:100%;max-width:360px;
+    transform:scale(0.95);transition:transform 0.2s;
+  }
+  #grad-modal-overlay.open #grad-modal-box{transform:scale(1)}
+  .grad-modal-icon{text-align:center;font-size:40px;margin-bottom:10px}
+  .grad-modal-title{font-family:'Bebas Neue',sans-serif;font-size:24px;
+    letter-spacing:1px;text-align:center;margin-bottom:4px}
+  .grad-modal-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:20px}
+  .grad-modal-field{margin-bottom:16px}
+  .grad-modal-label{font-size:10px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:1px;font-family:'JetBrains Mono',monospace;font-weight:600;
+    margin-bottom:6px;display:block}
+  .grad-modal-date{
+    width:100%;font-family:'JetBrains Mono',monospace;font-size:14px;
+    background:var(--surface2);border:1.5px solid var(--border);
+    border-radius:8px;color:var(--text);padding:10px 12px;
+    outline:none;-webkit-appearance:none;
+  }
+  .grad-modal-date:focus{border-color:var(--accent)}
+  .grad-modal-info{background:var(--surface2);border-radius:8px;
+    padding:10px 12px;margin-bottom:18px;
+    display:flex;gap:16px;justify-content:space-around}
+  .grad-modal-stat{text-align:center}
+  .grad-modal-stat-val{font-family:'Bebas Neue',sans-serif;font-size:22px;line-height:1}
+  .grad-modal-stat-val.ok{color:var(--green)}
+  .grad-modal-stat-val.over{color:var(--orange)}
+  .grad-modal-stat-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .grad-modal-actions{display:flex;gap:10px}
+  .grad-modal-btn{flex:1;padding:12px;border-radius:8px;
+    font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.5px;
+    cursor:pointer;border:none;-webkit-tap-highlight-color:transparent}
+  .grad-modal-btn.confirm{background:linear-gradient(90deg,var(--green),#4ade80);color:#000}
+  .grad-modal-btn.cancel{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+  .grad-modal-btn:active{opacity:0.75}
+
 </style>
 </head>
 <body>
@@ -772,6 +819,38 @@
   </div>
 </div>
 
+
+<!-- GRAD CONFIRM MODAL -->
+<div id="grad-modal-overlay">
+  <div id="grad-modal-box">
+    <div class="grad-modal-icon">&#127941;</div>
+    <div class="grad-modal-title" id="grad-modal-title">Grau Conquistado!</div>
+    <div class="grad-modal-sub" id="grad-modal-sub">Informe a data em que recebeu o grau</div>
+    <div class="grad-modal-field">
+      <label class="grad-modal-label" for="grad-modal-date-input">Data da graduacao</label>
+      <input type="date" class="grad-modal-date" id="grad-modal-date-input">
+    </div>
+    <div class="grad-modal-info">
+      <div class="grad-modal-stat">
+        <div class="grad-modal-stat-val ok" id="grad-modal-aulas">0</div>
+        <div class="grad-modal-stat-lbl">Aulas no ciclo</div>
+      </div>
+      <div class="grad-modal-stat">
+        <div class="grad-modal-stat-val" id="grad-modal-meta" style="color:var(--muted)">40</div>
+        <div class="grad-modal-stat-lbl">Meta</div>
+      </div>
+      <div class="grad-modal-stat">
+        <div class="grad-modal-stat-val" id="grad-modal-exc" style="color:var(--orange)">0</div>
+        <div class="grad-modal-stat-lbl">Excedente</div>
+      </div>
+    </div>
+    <div class="grad-modal-actions">
+      <button class="grad-modal-btn cancel" onclick="closeGradModal()">Cancelar</button>
+      <button class="grad-modal-btn confirm" onclick="confirmarGrau()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -899,28 +978,55 @@ function gradeProgress(){
   };
 }
 
+var gradModalN = 0; // which grade is being confirmed
+
 function receberGrau(n){
   var tot = totalSessions();
   if(tot < 1){ toast('Nenhuma sessao registrada ainda.'); return; }
   if(graduations[n]){ toast('Grau ' + n + ' ja foi recebido.'); return; }
-  // Require previous grade
   if(n > 1 && !graduations[n-1]){ toast('Receba o ' + (n-1) + 'o grau primeiro.'); return; }
 
+  gradModalN = n;
   var raw = gradeProgress()['raw'+n];
-  var MNAMES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  var today = todayKey();
-  var parts = today.split('-');
-  var dateLabel = parseInt(parts[2],10)+' '+MNAMES[parseInt(parts[1],10)-1]+'/'+parts[0];
+  var exc = Math.max(0, raw - 40);
 
-  if(!confirm('Confirmar recebimento do '+n+'o grau em '+dateLabel+'?\n\nAulas neste ciclo: '+raw+' (meta: 40)')) return;
+  // Populate modal
+  document.getElementById('grad-modal-title').textContent = n + 'o Grau Conquistado!';
+  document.getElementById('grad-modal-sub').textContent   = 'Informe a data em que recebeu o grau';
+  document.getElementById('grad-modal-aulas').textContent = raw;
+  document.getElementById('grad-modal-exc').textContent   = exc;
+  document.getElementById('grad-modal-exc').style.color   = exc > 0 ? 'var(--orange)' : 'var(--muted)';
+  // Default date = today, but allow any past date
+  document.getElementById('grad-modal-date-input').value  = todayKey();
+  document.getElementById('grad-modal-date-input').max    = todayKey();
 
-  graduations[n] = { date: today, totalAulas: tot, aulasNoCiclo: raw };
+  document.getElementById('grad-modal-overlay').classList.add('open');
+}
+
+function closeGradModal(){
+  document.getElementById('grad-modal-overlay').classList.remove('open');
+  gradModalN = 0;
+}
+
+function confirmarGrau(){
+  if(!gradModalN) return;
+  var n   = gradModalN;
+  var dateInput = document.getElementById('grad-modal-date-input');
+  var dateVal   = dateInput.value;
+  if(!dateVal){ toast('Selecione a data da graduacao.'); return; }
+  if(dateVal > todayKey()){ toast('A data nao pode ser no futuro.'); return; }
+
+  var tot = totalSessions();
+  var raw = gradeProgress()['raw'+n];
+
+  graduations[n] = { date: dateVal, totalAulas: tot, aulasNoCiclo: raw };
   saveState();
+  closeGradModal();
   updateAulas();
   renderGradHistory();
   renderCalendar();
   renderTimeline();
-  toast('&#127941; '+n+'o grau conquistado! Parabens!');
+  toast('&#127941; ' + n + 'o grau confirmado! Parabens!');
 }
 
 function desfazerGrau(n){
