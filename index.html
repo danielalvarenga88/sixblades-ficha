@@ -398,6 +398,29 @@
   /* Calendar note dot */
   .cal-note-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);position:absolute;top:3px;right:3px}
 
+
+  /* BACKUP REMINDER BANNER */
+  #backup-banner{
+    display:none;
+    background:var(--gold-dim);border:1px solid rgba(201,168,76,0.4);
+    border-radius:10px;padding:12px 14px;margin-bottom:14px;
+    align-items:center;gap:10px;flex-wrap:wrap;
+  }
+  #backup-banner.show{display:flex}
+  .backup-banner-icon{font-size:18px;flex-shrink:0}
+  .backup-banner-text{flex:1;font-size:12px;color:var(--text);line-height:1.4}
+  .backup-banner-text strong{color:var(--gold)}
+  .backup-banner-actions{display:flex;gap:6px;flex-wrap:wrap}
+  .backup-banner-btn{
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+    padding:5px 12px;border-radius:6px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;transition:all 0.15s;
+    white-space:nowrap;
+  }
+  .backup-banner-btn.primary{background:var(--gold);border:none;color:#000}
+  .backup-banner-btn.secondary{background:none;border:1px solid var(--border);color:var(--muted)}
+  .backup-banner-btn:active{opacity:0.7}
+
 </style>
 </head>
 <body>
@@ -418,6 +441,18 @@
     <button class="s-btn" onclick="document.getElementById('file-input').click()">⬆ Restaurar</button>
     <button class="s-btn danger" onclick="resetAll()">↺ Resetar</button>
     <input type="file" id="file-input" accept=".json" onchange="importBackup(event)">
+  </div>
+</div>
+
+<div id="backup-banner">
+  <div class="backup-banner-icon">&#9888;</div>
+  <div class="backup-banner-text">
+    <strong>Lembrete de backup</strong><br>
+    <span id="backup-banner-msg">Faz mais de 7 dias desde o ultimo backup.</span>
+  </div>
+  <div class="backup-banner-actions">
+    <button class="backup-banner-btn primary" onclick="exportBackup();dismissBackupBanner()">&#8595; Fazer backup</button>
+    <button class="backup-banner-btn secondary" onclick="dismissBackupBanner()">Agora nao</button>
   </div>
 </div>
 
@@ -665,7 +700,8 @@
 <div id="toast"></div>
 
 <script>
-var LS_KEY = 'sixblades_v6';
+var LS_KEY = 'sixblades_ficha'; // permanent key — never changes between versions
+var LEGACY_KEYS = ['sixblades_v6','sixblades_v5','sixblades_v4','sixblades_v3','sixblades_ficha_v1','sixblades_ficha_v2'];
 var META   = 30;
 var MS     = [10, 20, 30];
 
@@ -763,7 +799,7 @@ function buildCumulativeMap(){
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 function stateToJSON(){
-  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,_v:7});
+  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,_v:8});
 }
 function applyState(d){
   reps       = d.reps       || {};
@@ -774,10 +810,38 @@ function applyState(d){
   techNames  = d.techNames  || {};
 }
 function loadState(){
+  // 1. Try permanent key first
   try{
     var raw=localStorage.getItem(LS_KEY);
-    if(raw){ applyState(JSON.parse(raw)); setStatus('ok'); return; }
+    if(raw){
+      applyState(JSON.parse(raw));
+      setStatus('ok');
+      return;
+    }
   }catch(e){}
+
+  // 2. Try legacy keys — migrate automatically
+  for(var li=0;li<LEGACY_KEYS.length;li++){
+    try{
+      var old=localStorage.getItem(LEGACY_KEYS[li]);
+      if(old){
+        var parsed=JSON.parse(old);
+        applyState(parsed);
+        // Migrate to new permanent key
+        localStorage.setItem(LS_KEY, JSON.stringify({
+          reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,
+          notes:notes,techNames:techNames,_v:7
+        }));
+        // Remove old key
+        try{ localStorage.removeItem(LEGACY_KEYS[li]); }catch(e2){}
+        setStatus('ok');
+        setTimeout(function(){
+          toast('Dados migrados da versao anterior!');
+        }, 1200);
+        return;
+      }
+    }catch(e){}
+  }
 }
 var saveTimer=null;
 function saveState(){
@@ -811,7 +875,9 @@ function exportBackup(){
   a.download='sixblades-'+now.toISOString().slice(0,10)+'.json';
   a.click();
   URL.revokeObjectURL(url);
-  toast('Backup exportado');
+  recordBackupTimestamp();
+  dismissBackupBanner();
+  toast('Backup salvo! Guarde o arquivo com seguranca.');
 }
 function importBackup(e){
   var file=e.target.files[0]; if(!file) return;
@@ -2140,6 +2206,48 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 
+
+// ── BACKUP REMINDER SYSTEM ────────────────────────────────────────────────────
+var BACKUP_TS_KEY = 'sixblades_last_backup';
+var BACKUP_REMIND_DAYS = 7; // remind after 7 days without backup
+
+function checkBackupReminder(){
+  // Don't show if no data at all
+  if(totalSessions()===0 && Object.keys(reps).length===0) return;
+
+  var lastBackup = null;
+  try{ lastBackup = localStorage.getItem(BACKUP_TS_KEY); }catch(e){}
+
+  var banner = document.getElementById('backup-banner');
+  var msg    = document.getElementById('backup-banner-msg');
+  if(!banner) return;
+
+  if(!lastBackup){
+    // Never backed up — show if there's meaningful data
+    if(totalSessions()>5){
+      if(msg) msg.textContent = 'Voce ainda nao fez nenhum backup. Seus dados podem ser perdidos ao atualizar.';
+      banner.classList.add('show');
+    }
+    return;
+  }
+
+  var daysSince = Math.floor((Date.now() - parseInt(lastBackup,10)) / 86400000);
+  if(daysSince >= BACKUP_REMIND_DAYS){
+    if(msg) msg.textContent = 'Faz ' + daysSince + ' dia(s) desde o ultimo backup. Recomendamos fazer um antes de qualquer atualizacao.';
+    banner.classList.add('show');
+  }
+}
+
+function dismissBackupBanner(){
+  var banner = document.getElementById('backup-banner');
+  if(banner) banner.classList.remove('show');
+}
+
+function recordBackupTimestamp(){
+  try{ localStorage.setItem(BACKUP_TS_KEY, String(Date.now())); }catch(e){}
+}
+
+
 function renderAll(){
   renderBlocks(); renderRegras(); updateStats(); updateAulas(); renderCalendar(); renderEvol(); updateFabBadge();
 }
@@ -2290,6 +2398,8 @@ setTimeout(function(){
   renderAll();
   // Second pass for SVG charts after layout is stable
   setTimeout(function(){ renderEvol(); renderCalendar(); }, 120);
+  // Backup reminder check
+  checkBackupReminder();
 }, 0);
 
 </script>
