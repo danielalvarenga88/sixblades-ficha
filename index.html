@@ -269,6 +269,135 @@
   .panel-drag-handle-label{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
   .drag-drop-zone{height:4px;border-radius:2px;margin:2px 0;transition:all 0.15s;background:transparent}
   .drag-drop-zone.active{height:32px;background:var(--accent-glow);border:1px dashed rgba(37,99,235,0.4);border-radius:8px}
+
+  /* TECH NAME EDIT */
+  .tech-name-wrap{flex:1;position:relative;min-width:0}
+  .tech-name{font-size:12px;font-weight:500;line-height:1.3;cursor:default}
+  .tech-item.mastered .tech-name{color:var(--green)}
+  .tech-name-input{
+    width:100%;font-size:12px;font-weight:500;line-height:1.3;
+    background:var(--surface);border:1.5px solid var(--accent);
+    border-radius:5px;color:var(--text);padding:2px 6px;
+    font-family:'DM Sans',sans-serif;outline:none;
+    -webkit-appearance:none;
+  }
+  .tech-edit-hint{font-size:9px;color:var(--accent);margin-top:2px;font-style:italic}
+
+  /* NOTES FLOATING BUTTON */
+  #notes-fab{
+    position:fixed;bottom:24px;right:18px;z-index:900;
+    width:52px;height:52px;border-radius:50%;
+    background:var(--accent);border:none;
+    box-shadow:0 4px 16px rgba(37,99,235,0.45);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:all 0.2s;
+    -webkit-tap-highlight-color:transparent;
+  }
+  #notes-fab:active{transform:scale(0.92)}
+  #notes-fab svg{width:22px;height:22px;fill:white}
+  #notes-fab .fab-badge{
+    position:absolute;top:0;right:0;
+    background:var(--gold);color:#000;
+    font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    border-radius:50%;width:16px;height:16px;
+    display:none;align-items:center;justify-content:center;
+  }
+
+  /* NOTES MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:950;
+    background:rgba(0,0,0,0.7);
+    display:flex;align-items:flex-end;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity 0.25s;
+  }
+  .modal-overlay.open{opacity:1;pointer-events:all}
+  .modal-sheet{
+    background:var(--surface);border-radius:18px 18px 0 0;
+    width:100%;max-width:600px;
+    max-height:88vh;display:flex;flex-direction:column;
+    transform:translateY(100%);transition:transform 0.28s cubic-bezier(.4,0,.2,1);
+    -webkit-overflow-scrolling:touch;
+  }
+  .modal-overlay.open .modal-sheet{transform:translateY(0)}
+  .modal-handle{width:36px;height:4px;border-radius:2px;background:var(--border);margin:10px auto 0}
+  .modal-header{padding:14px 18px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0}
+  .modal-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px}
+  .modal-title span{color:var(--accent)}
+  .modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+  .modal-body{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;padding:14px 18px 24px}
+
+  /* NOTE DAY SELECTOR */
+  .note-day-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .note-day-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0}
+  .note-day-input{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    background:var(--surface2);border:1px solid var(--border);
+    border-radius:6px;color:var(--text);padding:5px 9px;outline:none;
+    -webkit-appearance:none;
+  }
+  .note-day-input:focus{border-color:var(--accent)}
+  .note-today-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:5px 10px;border-radius:6px;border:1px solid var(--accent);background:var(--accent-glow);color:var(--accent);cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+
+  /* DIARY TAB */
+  .note-tabs{display:flex;gap:6px;margin-bottom:14px}
+  .note-tab{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .note-tab.active{background:var(--accent);border-color:var(--accent);color:white}
+  .note-panel{display:none}
+  .note-panel.active{display:block}
+
+  /* DIARY TEXTAREA */
+  .diary-fields{display:flex;flex-direction:column;gap:10px}
+  .diary-field-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+  .diary-textarea{
+    width:100%;min-height:80px;resize:vertical;
+    background:var(--surface2);border:1px solid var(--border);
+    border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;
+    font-size:13px;line-height:1.5;padding:10px 12px;outline:none;
+    -webkit-appearance:none;
+  }
+  .diary-textarea:focus{border-color:var(--accent)}
+  .diary-save-btn{
+    width:100%;padding:11px;border-radius:8px;
+    background:var(--accent);border:none;color:white;
+    font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;
+    cursor:pointer;margin-top:6px;-webkit-tap-highlight-color:transparent;
+  }
+  .diary-save-btn:active{opacity:0.8}
+
+  /* TECH NOTES PANEL */
+  .tech-note-list{display:flex;flex-direction:column;gap:6px}
+  .tech-note-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+  .tech-note-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .tech-note-name{font-size:12px;font-weight:600;color:var(--text)}
+  .tech-note-del{font-size:11px;color:var(--muted);cursor:pointer;padding:2px 6px;border-radius:4px;border:1px solid var(--border);background:none;-webkit-tap-highlight-color:transparent}
+  .tech-note-del:active{border-color:var(--red);color:var(--red)}
+  .tech-note-textarea{
+    width:100%;min-height:60px;resize:vertical;
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;
+    font-size:12px;line-height:1.5;padding:7px 10px;outline:none;-webkit-appearance:none;
+  }
+  .tech-note-textarea:focus{border-color:var(--accent)}
+  .add-tech-note-btn{
+    width:100%;padding:9px;border-radius:8px;margin-top:8px;
+    background:var(--surface2);border:1.5px dashed var(--border);
+    color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;
+    cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .add-tech-note-btn:active{border-color:var(--accent);color:var(--accent)}
+
+  /* DIARY LOG LIST */
+  .diary-log-list{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+  .diary-log-item{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+  .diary-log-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
+  .diary-log-del{font-size:10px;color:var(--muted);cursor:pointer;padding:1px 6px;border-radius:4px;border:1px solid var(--border);background:none;-webkit-tap-highlight-color:transparent}
+  .diary-log-del:active{border-color:var(--red);color:var(--red)}
+  .diary-log-text{font-size:12px;color:var(--text);line-height:1.5;white-space:pre-wrap}
+  .diary-log-text.secondary{color:var(--muted);font-size:11px;margin-top:4px;padding-top:4px;border-top:1px solid var(--border)}
+
+  /* Calendar note dot */
+  .cal-note-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);position:absolute;top:3px;right:3px}
+
 </style>
 </head>
 <body>
@@ -471,6 +600,68 @@
   </div>
 </div>
 
+
+<!-- NOTES FAB -->
+<button id="notes-fab" onclick="openNotes(todayKey())" title="Anotar treino de hoje">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+  </svg>
+  <div class="fab-badge" id="notes-fab-badge">0</div>
+</button>
+
+<!-- NOTES MODAL -->
+<div class="modal-overlay" id="notes-modal">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">ANOTACOES <span id="notes-modal-date"></span></div>
+      <button class="modal-close" onclick="closeNotes()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="note-day-bar">
+        <span class="note-day-label">Data:</span>
+        <input type="date" class="note-day-input" id="note-date-input" onchange="loadNoteForDate(this.value)">
+        <button class="note-today-btn" onclick="goToToday()">Hoje</button>
+      </div>
+      <div class="note-tabs">
+        <button class="note-tab active" onclick="showNoteTab('diary')">Diario do treino</button>
+        <button class="note-tab" onclick="showNoteTab('techs')">Notas por tecnica</button>
+        <button class="note-tab" onclick="showNoteTab('history')">Historico</button>
+      </div>
+
+      <!-- DIARY TAB -->
+      <div class="note-panel active" id="note-panel-diary">
+        <div class="diary-fields">
+          <div>
+            <div class="diary-field-label">O que treinei hoje</div>
+            <textarea class="diary-textarea" id="diary-treino" placeholder="Tecnicas praticadas, foco do treino..."></textarea>
+          </div>
+          <div>
+            <div class="diary-field-label">Dificuldades / pontos de atencao</div>
+            <textarea class="diary-textarea" id="diary-dific" placeholder="O que preciso melhorar..."></textarea>
+          </div>
+          <div>
+            <div class="diary-field-label">Observacoes gerais</div>
+            <textarea class="diary-textarea" id="diary-obs" placeholder="Sensacoes, energia, insights..."></textarea>
+          </div>
+          <button class="diary-save-btn" onclick="saveDiary()">SALVAR ANOTACAO</button>
+        </div>
+      </div>
+
+      <!-- TECH NOTES TAB -->
+      <div class="note-panel" id="note-panel-techs">
+        <div class="tech-note-list" id="tech-note-list"></div>
+        <button class="add-tech-note-btn" onclick="addTechNote()">+ Adicionar nota de tecnica</button>
+      </div>
+
+      <!-- HISTORY TAB -->
+      <div class="note-panel" id="note-panel-history">
+        <div class="diary-log-list" id="diary-log-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -527,6 +718,8 @@ var REGRAS = [
 var reps = {}, regrasOk = {}, freq = 4;
 var trainDays = {};
 var calYear, calMonth;
+var notes = {};      // key: 'YYYY-MM-DD' -> {treino:'', dific:'', obs:'', techs:[{name:'',text:''}]}
+var techNames = {};  // key: techKey -> custom name string
 
 function K(b,g,i){ return b+'|'+g+'|'+i; }
 function mastered(k){ return (reps[k]||0) >= META; }
@@ -570,13 +763,15 @@ function buildCumulativeMap(){
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 function stateToJSON(){
-  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,_v:6});
+  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,_v:7});
 }
 function applyState(d){
-  reps      = d.reps      || {};
-  regrasOk  = d.regrasOk  || {};
-  freq      = d.freq      || 4;
-  trainDays = d.trainDays || {};
+  reps       = d.reps       || {};
+  regrasOk   = d.regrasOk   || {};
+  freq       = d.freq       || 4;
+  trainDays  = d.trainDays  || {};
+  notes      = d.notes      || {};
+  techNames  = d.techNames  || {};
 }
 function loadState(){
   try{
@@ -707,6 +902,14 @@ function renderCalendar(){
           band.className='cal-day-band band-'+gradeBand(cum);
           el.appendChild(band);
         }
+      }
+
+
+      // Note indicator dot
+      if(notes[k] && (notes[k].treino||notes[k].dific||notes[k].obs||(notes[k].techs&&notes[k].techs.length>0))){
+        var ndot=document.createElement('div');
+        ndot.className='cal-note-dot';
+        el.appendChild(ndot);
       }
 
       if(!isFuture){
@@ -846,6 +1049,48 @@ function renderTimeline(){
 }
 
 // ── BLOCKS ────────────────────────────────────────────────────────────────────
+
+// ── TECH ITEM DATA-ATTRIBUTE HANDLERS ────────────────────────────────────────
+// Global map: safeKey -> original techKey (populated during renderBlocks)
+var skToKey = {};
+
+function cbClick(el){
+  var bid=el.getAttribute('data-bid');
+  var eg=el.getAttribute('data-eg');
+  var ei=el.getAttribute('data-ei');
+  toggleMaster(bid,eg,ei);
+}
+function repClick(el,delta){
+  var bid=el.getAttribute('data-bid');
+  var eg=el.getAttribute('data-eg');
+  var ei=el.getAttribute('data-ei');
+  addRep(bid,eg,ei,delta);
+}
+
+// Long press for tech rename — using data-ek (safeKey) to look up real key
+var tlpTimer2=null, tlpFired=false;
+function tlpMD(e,el){
+  tlpFired=false;
+  var sk=el.getAttribute('data-ek');
+  tlpTimer2=setTimeout(function(){ tlpFired=true; startTechEditBySafeKey(sk); },600);
+}
+function tlpMU(e){ clearTimeout(tlpTimer2); }
+function tlpTD(e,el){
+  tlpFired=false;
+  var sk=el.getAttribute('data-ek');
+  tlpTimer2=setTimeout(function(){ tlpFired=true; startTechEditBySafeKey(sk); },600);
+}
+function tlpTU(e){ clearTimeout(tlpTimer2); if(tlpFired){ e.preventDefault(); } }
+function tlpCancel(){ clearTimeout(tlpTimer2); tlpFired=false; }
+
+function startTechEditBySafeKey(safeKey){
+  // Look up real techKey from skToKey map
+  var techKey = skToKey[safeKey];
+  if(!techKey) return;
+  startTechEdit(techKey);
+}
+
+
 function renderBlocks(){
   var grid=document.getElementById('blocks-grid');
   var openBids=[];
@@ -883,20 +1128,33 @@ function renderBlocks(){
           var mcls=c>=MS[mi]?(mi===2?'r3':mi===1?'r2':'r1'):'';
           dots+='<div class="ms-dot '+mcls+'"></div>';
         }
-        var eg=grp.n.replace(/'/g,"\\'"), ei=it.replace(/'/g,"\\'");
-        bodyHtml+='<div class="tech-item'+(ms?' mastered':ip?' in-progress':'')+'">'+
+        var eg=grp.n.replace(/'/g,"\'"), ei=it.replace(/'/g,"\'");
+        var ek=bl.id+'|'+grp.n+'|'+it;
+        var displayName=techNames[ek]||it;
+        var safeKey=ek.replace(/[^a-z0-9]/gi,'_');
+        skToKey[safeKey]=ek;
+        bodyHtml+='<div class="tech-item'+(ms?' mastered':ip?' in-progress':'')+'" id="ti_'+safeKey+'"'+
+          ' data-bid="'+bl.id+'" data-gn="'+safeKey+'" data-it="'+safeKey+'">'+
           '<div class="tech-top">'+
-          '<div class="tech-cb" onclick="toggleMaster(\''+bl.id+'\',\''+eg+'\',\''+ei+'\')">'+
+          '<div class="tech-cb" data-bid="'+bl.id+'" data-eg="'+eg+'" data-ei="'+ei+'"'+
+          ' onclick="cbClick(this)">'+
           '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5L4.5 8.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>'+
           '</div>'+
-          '<div class="tech-name">'+it+'</div>'+
+          '<div class="tech-name-wrap">'+
+          '<div class="tech-name" id="tn_'+safeKey+'" data-ek="'+safeKey+'"'+
+          ' onmousedown="tlpMD(event,this)" onmouseup="tlpMU(event)" onmouseleave="tlpCancel()"'+
+          ' ontouchstart="tlpTD(event,this)" ontouchend="tlpTU(event)" ontouchcancel="tlpCancel()"'+
+          ' title="Toque longo para renomear">'+displayName+'</div>'+
+          '</div>'+
           '<div class="ms-wrap">'+dots+'</div>'+
           '</div>'+
           '<div class="tech-rep-row">'+
-          '<button class="btn-rep" onclick="addRep(\''+bl.id+'\',\''+eg+'\',\''+ei+'\',-1)">&#8722;</button>'+
+          '<button class="btn-rep btn-minus" data-bid="'+bl.id+'" data-eg="'+eg+'" data-ei="'+ei+'"'+
+          ' onclick="repClick(this,-1)">&#8722;</button>'+
           '<div class="rep-bar-bg"><div class="rep-bar-fill '+sg+'" style="width:'+pctR+'%"></div></div>'+
           '<span class="rep-num '+sg+'">'+c+'/'+META+'</span>'+
-          '<button class="btn-rep" onclick="addRep(\''+bl.id+'\',\''+eg+'\',\''+ei+'\',1)">+</button>'+
+          '<button class="btn-rep btn-plus" data-bid="'+bl.id+'" data-eg="'+eg+'" data-ei="'+ei+'"'+
+          ' onclick="repClick(this,1)">+</button>'+
           '<span class="rep-suffix">reps</span>'+
           '</div>'+
           '</div>';
@@ -1597,8 +1855,293 @@ function renderHeat(filteredKeys){
   }
 }
 
+
+// ── TECH NAME LONG PRESS ──────────────────────────────────────────────────────
+var tlpTimer = null;
+var tlpActive = false;
+
+function tlpStart(e, techKey){
+  tlpActive = false;
+  clearTimeout(tlpTimer);
+  tlpTimer = setTimeout(function(){
+    tlpActive = true;
+    startTechEdit(techKey);
+  }, 600);
+}
+function tlpEnd(e){
+  clearTimeout(tlpTimer);
+  // if long press fired, prevent the click
+  if(tlpActive){ if(e && e.preventDefault) e.preventDefault(); }
+  tlpActive = false;
+}
+function tlpCancel(){
+  clearTimeout(tlpTimer);
+  tlpActive = false;
+}
+
+function startTechEdit(techKey){
+  var safeKey = techKey.replace(/[^a-z0-9]/gi,'_');
+  var nameEl = document.getElementById('tn_'+safeKey);
+  if(!nameEl) return;
+  var currentName = techNames[techKey] || nameEl.textContent;
+  var wrap = nameEl.parentNode;
+  nameEl.style.display = 'none';
+
+  var inp = document.createElement('input');
+  inp.type = 'text';
+  inp.className = 'tech-name-input';
+  inp.value = currentName;
+  inp.id = 'inp_'+safeKey;
+
+  var hint = document.createElement('div');
+  hint.className = 'tech-edit-hint';
+  hint.textContent = 'Enter para salvar · Esc para cancelar';
+
+  wrap.appendChild(inp);
+  wrap.appendChild(hint);
+  inp.focus();
+  inp.select();
+
+  inp.addEventListener('keydown', function(ev){
+    if(ev.key === 'Enter' || ev.keyCode === 13){
+      saveTechName(techKey, inp.value.trim());
+      finishTechEdit(safeKey, techKey);
+    }
+    if(ev.key === 'Escape' || ev.keyCode === 27){
+      finishTechEdit(safeKey, techKey);
+    }
+  });
+  inp.addEventListener('blur', function(){
+    saveTechName(techKey, inp.value.trim());
+    finishTechEdit(safeKey, techKey);
+  });
+  toast('Toque longo ativado — renomeie a tecnica');
+}
+
+function saveTechName(techKey, newName){
+  if(!newName) return;
+  // Get original name from BLOCKS data
+  var parts = techKey.split('|');
+  var bid = parts[0], gn = parts[1], it = parts[2];
+  if(newName === it){ delete techNames[techKey]; }
+  else { techNames[techKey] = newName; }
+  saveState();
+}
+
+function finishTechEdit(safeKey, techKey){
+  var inp = document.getElementById('inp_'+safeKey);
+  var nameEl = document.getElementById('tn_'+safeKey);
+  if(!inp || !nameEl) return;
+  var hint = inp.nextSibling;
+  if(inp.parentNode){ inp.parentNode.removeChild(inp); }
+  if(hint && hint.parentNode){ hint.parentNode.removeChild(hint); }
+  // Update display
+  var parts = techKey.split('|');
+  nameEl.textContent = techNames[techKey] || parts[2];
+  nameEl.style.display = '';
+}
+
+// ── NOTES MODULE ──────────────────────────────────────────────────────────────
+var currentNoteDate = '';
+
+function openNotes(dateStr){
+  currentNoteDate = dateStr || todayKey();
+  var modal = document.getElementById('notes-modal');
+  var dateInput = document.getElementById('note-date-input');
+  if(dateInput) dateInput.value = currentNoteDate;
+  updateNotesModalTitle();
+  loadNoteForDate(currentNoteDate);
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNotes(){
+  document.getElementById('notes-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function goToToday(){
+  var today = todayKey();
+  document.getElementById('note-date-input').value = today;
+  currentNoteDate = today;
+  updateNotesModalTitle();
+  loadNoteForDate(today);
+}
+
+function updateNotesModalTitle(){
+  var el = document.getElementById('notes-modal-date');
+  if(!el) return;
+  var parts = currentNoteDate.split('-');
+  var MNAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  el.textContent = parseInt(parts[2],10)+' '+MNAMES[parseInt(parts[1],10)-1]+'/'+parts[0].slice(2);
+}
+
+function showNoteTab(id){
+  var tabs = document.querySelectorAll('.note-tab');
+  var panels = document.querySelectorAll('.note-panel');
+  var labels = {diary:'Diario do treino', techs:'Notas por tecnica', history:'Historico'};
+  for(var i=0;i<tabs.length;i++) tabs[i].classList.toggle('active', tabs[i].textContent===labels[id]);
+  for(var i=0;i<panels.length;i++) panels[i].classList.remove('active');
+  var p = document.getElementById('note-panel-'+id);
+  if(p) p.classList.add('active');
+  if(id==='history') renderDiaryHistory();
+}
+
+function loadNoteForDate(dateStr){
+  currentNoteDate = dateStr;
+  updateNotesModalTitle();
+  var n = notes[dateStr] || {};
+  var t = document.getElementById('diary-treino');
+  var d = document.getElementById('diary-dific');
+  var o = document.getElementById('diary-obs');
+  if(t) t.value = n.treino || '';
+  if(d) d.value = n.dific  || '';
+  if(o) o.value = n.obs    || '';
+  renderTechNotes(dateStr);
+}
+
+function saveDiary(){
+  var t = document.getElementById('diary-treino').value.trim();
+  var d = document.getElementById('diary-dific').value.trim();
+  var o = document.getElementById('diary-obs').value.trim();
+  if(!t && !d && !o){
+    // clear entry if all empty
+    if(notes[currentNoteDate]){
+      notes[currentNoteDate].treino=''; notes[currentNoteDate].dific=''; notes[currentNoteDate].obs='';
+    }
+  } else {
+    if(!notes[currentNoteDate]) notes[currentNoteDate]={treino:'',dific:'',obs:'',techs:[]};
+    notes[currentNoteDate].treino = t;
+    notes[currentNoteDate].dific  = d;
+    notes[currentNoteDate].obs    = o;
+  }
+  saveState();
+  renderCalendar();
+  updateFabBadge();
+  toast('Anotacao salva');
+}
+
+function renderTechNotes(dateStr){
+  var list = document.getElementById('tech-note-list');
+  if(!list) return;
+  var n = notes[dateStr] || {};
+  var techs = n.techs || [];
+  var html = '';
+  for(var i=0;i<techs.length;i++){
+    var idx = i;
+    html += '<div class="tech-note-item">'+
+      '<div class="tech-note-item-header">'+
+      '<input style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:12px;font-weight:600;padding:3px 7px;outline:none;font-family:DM Sans,sans-serif" '+
+      'value="'+escHtml(techs[i].name||'')+'" placeholder="Nome da tecnica" '+
+      'onchange="updateTechNoteName('+idx+',this.value)" oninput="updateTechNoteName('+idx+',this.value)">'+
+      '<button class="tech-note-del" onclick="deleteTechNote('+idx+')">&#10005;</button>'+
+      '</div>'+
+      '<textarea class="tech-note-textarea" placeholder="Observacoes sobre esta tecnica..." '+
+      'onchange="updateTechNoteText('+idx+',this.value)" oninput="updateTechNoteText('+idx+',this.value)">'+escHtml(techs[i].text||'')+'</textarea>'+
+      '</div>';
+  }
+  list.innerHTML = html;
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function addTechNote(){
+  if(!notes[currentNoteDate]) notes[currentNoteDate]={treino:'',dific:'',obs:'',techs:[]};
+  if(!notes[currentNoteDate].techs) notes[currentNoteDate].techs=[];
+  notes[currentNoteDate].techs.push({name:'',text:''});
+  renderTechNotes(currentNoteDate);
+  saveState();
+}
+
+function updateTechNoteName(idx, val){
+  if(!notes[currentNoteDate]||!notes[currentNoteDate].techs) return;
+  notes[currentNoteDate].techs[idx].name = val;
+  saveState();
+}
+
+function updateTechNoteText(idx, val){
+  if(!notes[currentNoteDate]||!notes[currentNoteDate].techs) return;
+  notes[currentNoteDate].techs[idx].text = val;
+  saveState();
+  updateFabBadge();
+}
+
+function deleteTechNote(idx){
+  if(!notes[currentNoteDate]||!notes[currentNoteDate].techs) return;
+  notes[currentNoteDate].techs.splice(idx,1);
+  renderTechNotes(currentNoteDate);
+  saveState();
+  updateFabBadge();
+}
+
+function renderDiaryHistory(){
+  var list = document.getElementById('diary-log-list');
+  if(!list) return;
+  var keys = Object.keys(notes).sort().reverse();
+  if(keys.length===0){ list.innerHTML='<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px">Nenhuma anotacao ainda.</div>'; return; }
+  var MNAMES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  var html='';
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];
+    var n=notes[k];
+    if(!n) continue;
+    var hasContent=(n.treino||n.dific||n.obs||(n.techs&&n.techs.length>0));
+    if(!hasContent) continue;
+    var parts=k.split('-');
+    var dateLabel=parseInt(parts[2],10)+' '+MNAMES[parseInt(parts[1],10)-1]+'/'+parts[0];
+    var techCount=(n.techs&&n.techs.length)||0;
+    html+='<div class="diary-log-item">'+
+      '<div class="diary-log-date">'+
+        '<span>'+dateLabel+'</span>'+
+        '<span style="color:var(--muted);font-size:9px">'+(techCount>0?techCount+' nota(s) de tecnica':'')+'</span>'+
+        '<button class="diary-log-del" onclick="deleteNoteDay(\''+k+'\')">&#10005;</button>'+
+      '</div>'+
+      (n.treino?'<div class="diary-log-text">'+escHtml(n.treino)+'</div>':'')+
+      (n.dific?'<div class="diary-log-text secondary">Dificuldades: '+escHtml(n.dific)+'</div>':'')+
+      (n.obs?'<div class="diary-log-text secondary">Obs: '+escHtml(n.obs)+'</div>':'')+
+      '</div>';
+  }
+  if(!html) html='<div style="text-align:center;padding:24px;color:var(--muted);font-size:12px">Nenhuma anotacao ainda.</div>';
+  list.innerHTML=html;
+}
+
+function deleteNoteDay(k){
+  if(!confirm('Apagar todas as anotacoes de '+k+'?')) return;
+  delete notes[k];
+  saveState();
+  renderCalendar();
+  updateFabBadge();
+  renderDiaryHistory();
+}
+
+function updateFabBadge(){
+  var badge = document.getElementById('notes-fab-badge');
+  if(!badge) return;
+  var count = 0;
+  var keys = Object.keys(notes);
+  for(var i=0;i<keys.length;i++){
+    var n=notes[keys[i]];
+    if(n&&(n.treino||n.dific||n.obs||(n.techs&&n.techs.length>0))) count++;
+  }
+  badge.textContent = count;
+  badge.style.display = count>0?'flex':'none';
+}
+
+// Close modal on overlay click
+document.addEventListener('DOMContentLoaded', function(){
+  var overlay = document.getElementById('notes-modal');
+  if(overlay){
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay) closeNotes();
+    });
+  }
+});
+
+
 function renderAll(){
-  renderBlocks(); renderRegras(); updateStats(); updateAulas(); renderCalendar(); renderEvol();
+  renderBlocks(); renderRegras(); updateStats(); updateAulas(); renderCalendar(); renderEvol(); updateFabBadge();
 }
 
 var toastT;
