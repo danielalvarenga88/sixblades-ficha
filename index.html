@@ -421,6 +421,61 @@
   .backup-banner-btn.secondary{background:none;border:1px solid var(--border);color:var(--muted)}
   .backup-banner-btn:active{opacity:0.7}
 
+
+  /* GRADUATION SYSTEM */
+  .grade-row-wrap{margin-bottom:10px}
+  .grade-row{display:flex;align-items:center;gap:8px;margin-bottom:0}
+  .grade-detail{display:flex;align-items:center;justify-content:space-between;
+    padding:5px 0 0 78px;gap:8px;flex-wrap:wrap}
+  .grade-detail-stat{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)}
+  .grade-detail-stat strong{color:var(--text)}
+  .grade-conquistado-btn{
+    font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.5px;
+    padding:4px 12px;border-radius:6px;border:none;cursor:pointer;
+    background:linear-gradient(90deg,var(--green),#4ade80);color:#000;
+    -webkit-tap-highlight-color:transparent;transition:all 0.15s;white-space:nowrap;
+    flex-shrink:0;
+  }
+  .grade-conquistado-btn:active{opacity:0.75;transform:scale(0.97)}
+  .grade-conquistado-btn.disabled{background:var(--surface2);color:var(--muted);
+    border:1px solid var(--border);cursor:default}
+  .grade-data-badge{font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:var(--green);background:var(--green-dim);
+    border:1px solid rgba(34,197,94,0.25);border-radius:20px;
+    padding:2px 8px;flex-shrink:0;white-space:nowrap}
+
+  /* GRADUATION HISTORY PANEL */
+  .grad-history-section{background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:16px 20px;margin-bottom:16px}
+  .grad-history-list{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+  .grad-card{background:var(--surface2);border:1px solid var(--border);
+    border-radius:10px;padding:12px 14px;position:relative;overflow:hidden}
+  .grad-card.done{border-color:rgba(34,197,94,0.35);background:rgba(34,197,94,0.05)}
+  .grad-card.pending{border-color:rgba(37,99,235,0.3);background:var(--accent-glow)}
+  .grad-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .grad-card-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.5px}
+  .grad-card.done .grad-card-title{color:var(--green)}
+  .grad-card.pending .grad-card-title{color:#93c5fd}
+  .grad-card-badge{font-size:18px}
+  .grad-card-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .grad-stat{text-align:center;background:var(--surface);border-radius:6px;padding:6px 4px}
+  .grad-stat-val{font-family:'Bebas Neue',sans-serif;font-size:20px;line-height:1}
+  .grad-stat-val.over{color:var(--orange)}
+  .grad-stat-val.ok{color:var(--green)}
+  .grad-stat-val.pend{color:#93c5fd}
+  .grad-stat-lbl{font-size:8px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:1px;margin-top:2px}
+  .grad-card-date{font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+  .grad-card-date span{color:var(--gold)}
+  .grad-undo-btn{font-size:10px;color:var(--muted);cursor:pointer;
+    padding:2px 7px;border-radius:4px;border:1px solid var(--border);background:none;
+    -webkit-tap-highlight-color:transparent;margin-top:6px;display:inline-block}
+  .grad-undo-btn:active{border-color:var(--red);color:var(--red)}
+
+  /* Calendar grad marker */
+  .cal-grad-marker{position:absolute;top:2px;left:3px;font-size:9px;line-height:1}
+
 </style>
 </head>
 <body>
@@ -490,30 +545,50 @@
 <div class="panel-drag-handle" draggable="true" ontouchstart="touchDragStart(event,'aula')" ontouchend="touchDragEnd(event)" ontouchmove="touchDragMove(event)" ondragstart="panelDragStart(event,'aula')" ondragend="panelDragEnd(event)" title="Arraste para reordenar"><div class="panel-drag-handle-dots"><span><b></b><b></b></span><span><b></b><b></b></span><span><b></b><b></b></span></div></div>
 <div class="aula-section">
   <div class="section-title"><span></span>Ciclo de Aulas — Graus na Faixa Branca</div>
-  <div class="grade-row">
-    <div class="grade-label">1º Grau</div>
-    <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g1" style="width:0%"><span class="mini-bar-text" id="txt-g1">0/40</span></div></div>
-    <span class="badge-done" id="badge-g1">&#10003;</span>
+
+  <!-- G1 -->
+  <div class="grade-row-wrap" id="wrap-g1">
+    <div class="grade-row">
+      <div class="grade-label">1º Grau</div>
+      <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g1" style="width:0%"><span class="mini-bar-text" id="txt-g1">0/40</span></div></div>
+    </div>
+    <div class="grade-detail" id="detail-g1"></div>
   </div>
-  <div class="grade-row" id="row-g2" style="opacity:0.35">
-    <div class="grade-label">2º Grau</div>
-    <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g2" style="width:0%"><span class="mini-bar-text" id="txt-g2">0/40</span></div></div>
-    <span class="badge-done" id="badge-g2">&#10003;</span>
+  <!-- G2 -->
+  <div class="grade-row-wrap" id="wrap-g2" style="opacity:0.35">
+    <div class="grade-row">
+      <div class="grade-label">2º Grau</div>
+      <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g2" style="width:0%"><span class="mini-bar-text" id="txt-g2">0/40</span></div></div>
+    </div>
+    <div class="grade-detail" id="detail-g2"></div>
   </div>
-  <div class="grade-row" id="row-g3" style="opacity:0.35">
-    <div class="grade-label">3º Grau</div>
-    <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g3" style="width:0%"><span class="mini-bar-text" id="txt-g3">0/40</span></div></div>
-    <span class="badge-done" id="badge-g3">&#10003;</span>
+  <!-- G3 -->
+  <div class="grade-row-wrap" id="wrap-g3" style="opacity:0.35">
+    <div class="grade-row">
+      <div class="grade-label">3º Grau</div>
+      <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g3" style="width:0%"><span class="mini-bar-text" id="txt-g3">0/40</span></div></div>
+    </div>
+    <div class="grade-detail" id="detail-g3"></div>
   </div>
-  <div class="grade-row" id="row-g4" style="opacity:0.35">
-    <div class="grade-label">4º Grau &#9733;</div>
-    <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g4" style="width:0%"><span class="mini-bar-text" id="txt-g4">0/40</span></div></div>
-    <span class="badge-done" id="badge-g4">&#10003;</span>
+  <!-- G4 -->
+  <div class="grade-row-wrap" id="wrap-g4" style="opacity:0.35">
+    <div class="grade-row">
+      <div class="grade-label">4º Grau &#9733;</div>
+      <div class="mini-bar-wrap"><div class="mini-bar-fill empty" id="bar-g4" style="width:0%"><span class="mini-bar-text" id="txt-g4">0/40</span></div></div>
+    </div>
+    <div class="grade-detail" id="detail-g4"></div>
   </div>
+
   <div style="margin-top:10px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:9px">
     &#9733; Ao completar o 4º grau o exame pode ser marcado com o Sensei Augusto.
     <span id="aulas-hint" style="color:var(--accent);margin-left:4px"></span>
   </div>
+</div>
+
+<!-- GRADUATION HISTORY PANEL -->
+<div class="grad-history-section" id="grad-history-section">
+  <div class="section-title"><span></span>Histórico de Graduações</div>
+  <div class="grad-history-list" id="grad-history-list"></div>
 </div>
 </div>
 
@@ -754,8 +829,11 @@ var REGRAS = [
 var reps = {}, regrasOk = {}, freq = 4;
 var trainDays = {};
 var calYear, calMonth;
-var notes = {};      // key: 'YYYY-MM-DD' -> {treino:'', dific:'', obs:'', techs:[{name:'',text:''}]}
-var techNames = {};  // key: techKey -> custom name string
+var notes = {};       // 'YYYY-MM-DD' -> {treino, dific, obs, techs}
+var techNames = {};   // techKey -> custom name
+// graduations[n] = {date:'YYYY-MM-DD', totalAulas:N} for grade n=1..4
+// gradeStarts[n] = cumulative session count at which grade n cycle started
+var graduations = {}; // {1:{date,totalAulas}, 2:{...}, ...}
 
 function K(b,g,i){ return b+'|'+g+'|'+i; }
 function mastered(k){ return (reps[k]||0) >= META; }
@@ -774,15 +852,87 @@ function monthSessions(y,m){
   for(var d=1;d<=days;d++) s+=trainDays[dayKey(y,m,d)]||0;
   return s;
 }
+// ── GRADUATION-AWARE GRADE PROGRESS ─────────────────────────────────────────
+// Each grade tracks sessions since its own start event.
+// graduations[n].totalAulas = cumulative sessions at time of receiving grade n.
+// Grade n+1 cycle starts from that point.
+
+function getGradeStart(n){
+  // Returns the cumulative session count at which grade n cycle started.
+  // Grade 1 starts at 0. Grade 2 starts when grade 1 was received, etc.
+  if(n <= 1) return 0;
+  var prev = graduations[n-1];
+  if(prev && prev.totalAulas) return prev.totalAulas;
+  // Fall back to fixed 40 * (n-1) if not recorded
+  return 40 * (n - 1);
+}
+
+function sessionsInGrade(n){
+  // Sessions accumulated since the start of grade n cycle
+  return Math.max(0, totalSessions() - getGradeStart(n));
+}
+
 function gradeProgress(){
-  var tot=totalSessions();
+  var tot = totalSessions();
+  // For each grade: sessions since that grade's cycle started
+  var g1s = getGradeStart(1); // always 0
+  var g2s = getGradeStart(2);
+  var g3s = getGradeStart(3);
+  var g4s = getGradeStart(4);
+
+  var g1 = graduations[1] ? 40 : Math.min(tot - g1s, 40);
+  var g2 = graduations[2] ? 40 : (graduations[1] ? Math.min(tot - g2s, 40) : Math.min(Math.max(tot - 40, 0), 40));
+  var g3 = graduations[3] ? 40 : (graduations[2] ? Math.min(tot - g3s, 40) : Math.min(Math.max(tot - 80, 0), 40));
+  var g4 = graduations[4] ? 40 : (graduations[3] ? Math.min(tot - g4s, 40) : Math.min(Math.max(tot - 120, 0), 40));
+
   return {
-    g1:Math.min(tot,40),
-    g2:Math.min(Math.max(tot-40,0),40),
-    g3:Math.min(Math.max(tot-80,0),40),
-    g4:Math.min(Math.max(tot-120,0),40),
-    total:tot
+    g1: Math.max(0, g1),
+    g2: Math.max(0, g2),
+    g3: Math.max(0, g3),
+    g4: Math.max(0, g4),
+    total: tot,
+    // raw counts since each cycle start (can exceed 40)
+    raw1: Math.max(0, tot - g1s),
+    raw2: graduations[1] ? Math.max(0, tot - g2s) : Math.max(0, tot - 40),
+    raw3: graduations[2] ? Math.max(0, tot - g3s) : Math.max(0, tot - 80),
+    raw4: graduations[3] ? Math.max(0, tot - g4s) : Math.max(0, tot - 120)
   };
+}
+
+function receberGrau(n){
+  var tot = totalSessions();
+  if(tot < 1){ toast('Nenhuma sessao registrada ainda.'); return; }
+  if(graduations[n]){ toast('Grau ' + n + ' ja foi recebido.'); return; }
+  // Require previous grade
+  if(n > 1 && !graduations[n-1]){ toast('Receba o ' + (n-1) + 'o grau primeiro.'); return; }
+
+  var raw = gradeProgress()['raw'+n];
+  var MNAMES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  var today = todayKey();
+  var parts = today.split('-');
+  var dateLabel = parseInt(parts[2],10)+' '+MNAMES[parseInt(parts[1],10)-1]+'/'+parts[0];
+
+  if(!confirm('Confirmar recebimento do '+n+'o grau em '+dateLabel+'?\n\nAulas neste ciclo: '+raw+' (meta: 40)')) return;
+
+  graduations[n] = { date: today, totalAulas: tot, aulasNoCiclo: raw };
+  saveState();
+  updateAulas();
+  renderGradHistory();
+  renderCalendar();
+  renderTimeline();
+  toast('&#127941; '+n+'o grau conquistado! Parabens!');
+}
+
+function desfazerGrau(n){
+  if(!graduations[n]) return;
+  if(!confirm('Desfazer o recebimento do '+n+'o grau? Os dados do ciclo serao restaurados.')) return;
+  delete graduations[n];
+  saveState();
+  updateAulas();
+  renderGradHistory();
+  renderCalendar();
+  renderTimeline();
+  toast('Graduacao ' + n + 'o grau desfeita.');
 }
 function gradeBand(cum){
   if(cum<=40)  return 'g1';
@@ -799,15 +949,16 @@ function buildCumulativeMap(){
 
 // ── STORAGE ───────────────────────────────────────────────────────────────────
 function stateToJSON(){
-  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,_v:8});
+  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,graduations:graduations,_v:9});
 }
 function applyState(d){
-  reps       = d.reps       || {};
-  regrasOk   = d.regrasOk   || {};
-  freq       = d.freq       || 4;
-  trainDays  = d.trainDays  || {};
-  notes      = d.notes      || {};
-  techNames  = d.techNames  || {};
+  reps        = d.reps        || {};
+  regrasOk    = d.regrasOk    || {};
+  freq        = d.freq        || 4;
+  trainDays   = d.trainDays   || {};
+  notes       = d.notes       || {};
+  techNames   = d.techNames   || {};
+  graduations = d.graduations || {};
 }
 function loadState(){
   // 1. Try permanent key first
@@ -830,7 +981,7 @@ function loadState(){
         // Migrate to new permanent key
         localStorage.setItem(LS_KEY, JSON.stringify({
           reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,
-          notes:notes,techNames:techNames,_v:7
+          notes:notes,techNames:techNames,graduations:graduations,_v:9
         }));
         // Remove old key
         try{ localStorage.removeItem(LEGACY_KEYS[li]); }catch(e2){}
@@ -971,6 +1122,17 @@ function renderCalendar(){
       }
 
 
+      // Graduation marker
+      for(var gn=1;gn<=4;gn++){
+        if(graduations[gn] && graduations[gn].date===k){
+          var gmark=document.createElement('div');
+          gmark.className='cal-grad-marker';
+          gmark.textContent='&#127941;';
+          gmark.title=gn+'o grau recebido';
+          el.appendChild(gmark);
+          break;
+        }
+      }
       // Note indicator dot
       if(notes[k] && (notes[k].treino||notes[k].dific||notes[k].obs||(notes[k].techs&&notes[k].techs.length>0))){
         var ndot=document.createElement('div');
@@ -1034,42 +1196,167 @@ function calNext(){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCal
 
 // ── GRADE BARS ────────────────────────────────────────────────────────────────
 function updateAulas(){
-  var gp=gradeProgress();
-  var apw=freq<0.5?0.5:freq;
+  var gp  = gradeProgress();
+  var apw = freq < 0.5 ? 0.5 : freq;
+  var MNAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 
-  function setGrade(n, val, cls){
-    var bar=document.getElementById('bar-g'+n);
-    var txt=document.getElementById('txt-g'+n);
-    var badge=document.getElementById('badge-g'+n);
-    var row=document.getElementById('row-g'+n);
-    if(val>=40){
-      bar.style.width='100%'; bar.className='mini-bar-fill done';
-      txt.textContent='40/40'; badge.style.display='inline-block';
-      if(row) row.style.opacity='1';
-    } else if(val>0){
-      bar.style.width=(val/40*100)+'%'; bar.className='mini-bar-fill '+cls;
-      txt.textContent=val+'/40'; badge.style.display='none';
-      if(row) row.style.opacity='1';
+  function fmtDate(d){
+    if(!d) return '';
+    var p=d.split('-');
+    return parseInt(p[2],10)+' '+MNAMES[parseInt(p[1],10)-1]+'/'+p[0];
+  }
+
+  function setGrade(n, progressVal, rawVal, barCls){
+    var bar    = document.getElementById('bar-g'+n);
+    var txt    = document.getElementById('txt-g'+n);
+    var wrap   = document.getElementById('wrap-g'+n);
+    var detail = document.getElementById('detail-g'+n);
+    var grad   = graduations[n];
+    var prevGrad = n > 1 ? graduations[n-1] : true; // grade 1 always available
+
+    // Determine if this grade cycle is active/available
+    var isActive = !!prevGrad;
+    var isDone   = !!grad;
+
+    if(wrap) wrap.style.opacity = isActive ? '1' : '0.35';
+
+    // Bar display
+    if(isDone){
+      bar.style.width = '100%';
+      bar.className   = 'mini-bar-fill done';
+      txt.textContent = grad.aulasNoCiclo + '/40';
+    } else if(isActive && rawVal > 0){
+      var pct = Math.min(rawVal / 40 * 100, 100);
+      bar.style.width = pct + '%';
+      bar.className   = 'mini-bar-fill ' + barCls;
+      txt.textContent = rawVal + '/40';
     } else {
-      bar.style.width='0%'; bar.className='mini-bar-fill empty';
-      txt.textContent='0/40'; badge.style.display='none';
-      if(n>1 && row) row.style.opacity='0.35';
+      bar.style.width = '0%';
+      bar.className   = 'mini-bar-fill empty';
+      txt.textContent = '0/40';
+    }
+
+    // Detail row
+    if(!detail) return;
+    if(!isActive){ detail.innerHTML = ''; return; }
+
+    var detailHtml = '';
+    if(isDone){
+      // Show: aulas no ciclo, data, excedente, undo button
+      var exc = grad.aulasNoCiclo - 40;
+      detailHtml  = '<span class="grade-data-badge">&#10003; Recebido em ' + fmtDate(grad.date) + '</span>';
+      detailHtml += '<span class="grade-detail-stat">Aulas no ciclo: <strong>' + grad.aulasNoCiclo + '</strong></span>';
+      if(exc > 0) detailHtml += '<span class="grade-detail-stat" style="color:var(--orange)">+' + exc + ' excedente(s)</span>';
+      detailHtml += '<button class="grad-undo-btn" onclick="desfazerGrau('+n+')">&#8617; Desfazer</button>';
+    } else {
+      // Show: current count + button if >= 40 or allow early
+      var canConquer = rawVal >= 38; // enable from 38 (Sensei decides timing)
+      detailHtml += '<span class="grade-detail-stat">Ciclo atual: <strong>' + rawVal + '/40</strong> aulas</span>';
+      if(rawVal > 40){
+        detailHtml += '<span class="grade-detail-stat" style="color:var(--orange)">+' + (rawVal-40) + ' alem da meta</span>';
+      }
+      detailHtml += '<button class="grade-conquistado-btn' + (canConquer?'':' disabled') + '" '+
+        'onclick="' + (canConquer?'receberGrau('+n+')':'') + '"' +
+        (canConquer?'':' title="Disponivel a partir de 38 aulas"') +
+        '>&#127941; Grau Conquistado</button>';
+    }
+    detail.innerHTML = detailHtml;
+  }
+
+  setGrade(1, gp.g1, gp.raw1, 'ag1');
+  setGrade(2, gp.g2, gp.raw2, 'ag2');
+  setGrade(3, gp.g3, gp.raw3, 'ag3');
+  setGrade(4, gp.g4, gp.raw4, 'ag4');
+
+  var hint = document.getElementById('aulas-hint');
+  if(hint){
+    if(gp.g4 >= 40 && graduations[4]){
+      hint.textContent = '4 grau concluido — agende o exame!';
+      hint.style.color = 'var(--green)';
+    } else if(!graduations[1] && gp.raw1 < 40){
+      hint.textContent = 'Faltam ' + (40 - gp.raw1) + ' sessoes para o 1 grau';
+      hint.style.color = 'var(--muted)';
+    } else if(!graduations[2] && gp.raw2 < 40){
+      hint.textContent = 'Faltam ' + (40 - gp.raw2) + ' sessoes para o 2 grau (~' + Math.ceil((40 - gp.raw2) / apw) + ' sem.)';
+      hint.style.color = 'var(--accent)';
+    } else if(!graduations[3] && gp.raw3 < 40){
+      hint.textContent = 'Faltam ' + (40 - gp.raw3) + ' sessoes para o 3 grau';
+      hint.style.color = 'var(--gold)';
+    } else if(!graduations[4]){
+      hint.textContent = 'Faltam ' + Math.max(0, 40 - gp.raw4) + ' sessoes para o 4 grau';
+      hint.style.color = 'var(--green)';
+    } else {
+      hint.textContent = '';
     }
   }
 
-  setGrade(1, gp.g1, 'ag1');
-  setGrade(2, gp.g2, 'ag2');
-  setGrade(3, gp.g3, 'ag3');
-  setGrade(4, gp.g4, 'ag4');
-
-  var hint=document.getElementById('aulas-hint');
-  if(gp.g4>=40){ hint.textContent='4 grau completo — agende o exame!'; hint.style.color='var(--green)'; }
-  else if(gp.g1<40){ hint.textContent='Faltam '+(40-gp.total)+' sessoes para o 1 grau'; hint.style.color='var(--muted)'; }
-  else if(gp.g2<40){ hint.textContent='Faltam '+(40-gp.g2)+' sessoes para o 2 grau (~'+Math.ceil((40-gp.g2)/apw)+' sem.)'; hint.style.color='var(--accent)'; }
-  else if(gp.g3<40){ hint.textContent='Faltam '+(40-gp.g3)+' sessoes para o 3 grau'; hint.style.color='var(--gold)'; }
-  else { hint.textContent='Faltam '+(40-gp.g4)+' sessoes para o 4 grau'; hint.style.color='var(--green)'; }
-
+  renderGradHistory();
   renderTimeline();
+}
+
+function renderGradHistory(){
+  var list = document.getElementById('grad-history-list');
+  if(!list) return;
+  var MNAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  function fmtDate(d){
+    if(!d) return '—';
+    var p=d.split('-');
+    return parseInt(p[2],10)+' de '+MNAMES[parseInt(p[1],10)-1]+' de '+p[0];
+  }
+  var gp   = gradeProgress();
+  var raws = [0, gp.raw1, gp.raw2, gp.raw3, gp.raw4];
+  var labels = ['','1º Grau','2º Grau','3º Grau','4º Grau'];
+  var badges  = ['','&#9711;','&#9711;','&#9711;','&#9733;'];
+
+  var html = '';
+  var prevAvail = true;
+  for(var n=1; n<=4; n++){
+    var grad = graduations[n];
+    var raw  = raws[n];
+    var exc  = grad ? (grad.aulasNoCiclo - 40) : 0;
+
+    if(grad){
+      // Done card
+      html += '<div class="grad-card done">';
+      html += '<div class="grad-card-header">';
+      html += '<div class="grad-card-title">'+labels[n]+'</div>';
+      html += '<div class="grad-card-badge">&#127941;</div>';
+      html += '</div>';
+      html += '<div class="grad-card-stats">';
+      html += '<div class="grad-stat"><div class="grad-stat-val ok">'+grad.aulasNoCiclo+'</div><div class="grad-stat-lbl">Aulas no ciclo</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val '+(exc>0?'over':'ok')+'">'+exc+'</div><div class="grad-stat-lbl">Excedente</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val ok">40</div><div class="grad-stat-lbl">Meta</div></div>';
+      html += '</div>';
+      html += '<div class="grad-card-date">Recebido em: <span>'+fmtDate(grad.date)+'</span></div>';
+      html += '<button class="grad-undo-btn" onclick="desfazerGrau('+n+')">&#8617; Desfazer graduacao</button>';
+      html += '</div>';
+    } else if(prevAvail){
+      // Active / pending card
+      var pct = Math.min(raw, 40);
+      html += '<div class="grad-card pending">';
+      html += '<div class="grad-card-header">';
+      html += '<div class="grad-card-title">'+labels[n]+' — Em andamento</div>';
+      html += '<div class="grad-card-badge">&#9654;</div>';
+      html += '</div>';
+      html += '<div class="grad-card-stats">';
+      html += '<div class="grad-stat"><div class="grad-stat-val pend">'+raw+'</div><div class="grad-stat-lbl">Aulas realizadas</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val pend">'+Math.max(0,40-raw)+'</div><div class="grad-stat-lbl">Faltam</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val pend">40</div><div class="grad-stat-lbl">Meta</div></div>';
+      html += '</div>';
+      html += '</div>';
+    } else {
+      // Locked card
+      html += '<div class="grad-card" style="opacity:0.3">';
+      html += '<div class="grad-card-header">';
+      html += '<div class="grad-card-title">'+labels[n]+'</div>';
+      html += '<div class="grad-card-badge">&#128274;</div>';
+      html += '</div>';
+      html += '<div style="font-size:11px;color:var(--muted)">Aguardando graduacao anterior.</div>';
+      html += '</div>';
+    }
+    prevAvail = !!grad;
+  }
+  list.innerHTML = html;
 }
 
 // ── TIMELINE ──────────────────────────────────────────────────────────────────
@@ -1091,11 +1378,14 @@ function renderTimeline(){
   var g4d=gp.g4>=40?hoje:addWeeks(g3d,(40-gp.g4)/apw);
   var exd=addWeeks(g4d,4);
 
+  function gradDate(n){ return graduations[n] ? new Date(graduations[n].date) : null; }
+  function gradSub(n, fallback){ return graduations[n] ? ('Recebido em ' + (function(){ var MNAMES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; var p=graduations[n].date.split('-'); return parseInt(p[2],10)+' '+MNAMES[parseInt(p[1],10)-1]; })()) : fallback; }
+
   var cards=[
-    {l:'1 Grau', d:g1d, sub:gp.g1>=40?'Concluido!':'Faltam '+(40-gp.g1)+' sessoes', tag:gp.g1>=40?'&#10003;':'&#9679;', cls:gp.g1>=40?'done-card':'active-card'},
-    {l:'2 Grau', d:g2d, sub:gp.g2>=40?'Concluido!':(40-gp.g2)+' sessoes', tag:gp.g2>=40?'&#10003;':'&#9675;', cls:gp.g2>=40?'done-card':gp.g1>=40?'active-card':''},
-    {l:'3 Grau', d:g3d, sub:gp.g3>=40?'Concluido!':(40-gp.g3)+' sessoes', tag:gp.g3>=40?'&#10003;':'&#9675;', cls:gp.g3>=40?'done-card':''},
-    {l:'4 Grau', d:g4d, sub:'Habilitado p/ exame', tag:'&#9733;', cls:''},
+    {l:'1 Grau', d:gradDate(1)||g1d, sub:graduations[1]?gradSub(1,''):'Faltam '+(40-gp.raw1)+' sessoes', tag:graduations[1]?'&#127941;':'&#9679;', cls:graduations[1]?'done-card':'active-card'},
+    {l:'2 Grau', d:gradDate(2)||g2d, sub:graduations[2]?gradSub(2,''):(40-gp.raw2)+' sessoes', tag:graduations[2]?'&#127941;':'&#9675;', cls:graduations[2]?'done-card':graduations[1]?'active-card':''},
+    {l:'3 Grau', d:gradDate(3)||g3d, sub:graduations[3]?gradSub(3,''):(40-gp.raw3)+' sessoes', tag:graduations[3]?'&#127941;':'&#9675;', cls:graduations[3]?'done-card':''},
+    {l:'4 Grau', d:gradDate(4)||g4d, sub:graduations[4]?gradSub(4,''):'Habilitado apos 4 grau', tag:graduations[4]?'&#127941;':'&#9733;', cls:graduations[4]?'done-card':''},
     {l:'Exame Faixa Azul', d:exd, sub:'~4 sem. apos 4 grau', tag:'&#129303;', cls:'exam-card'}
   ];
 
