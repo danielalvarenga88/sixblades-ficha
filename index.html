@@ -632,10 +632,10 @@
     color: var(--muted); font-size: 11px; font-family: 'DM Sans', sans-serif;
     font-style: italic; padding: 5px 9px 6px 37px; outline: none; resize: none;
     line-height: 1.4; -webkit-appearance: none;
-    display: none;
+    display: block;
   }
-  .tech-desc-input.editing { display: block; }
-  .tech-desc-input::placeholder { color: rgba(107,107,126,0.5); }
+  .tech-desc-input:focus { color: var(--text); border-top-color: var(--accent); }
+  .tech-desc-input::placeholder { color: rgba(107,107,126,0.35); font-size: 10px; }
 
   /* ── ADD TECHNIQUE BUTTON ── */
   .add-tech-btn {
@@ -1828,7 +1828,7 @@ function renderBlocks(){
           ' placeholder="Descricao da tecnica..." rows="2"'+
           ' onchange="saveTechDesc(\''+safeKey+'\',this.value)"'+
           ' oninput="saveTechDesc(\''+safeKey+'\',this.value)"'+
-          ' onclick="this.classList.add(\'editing\')">'+(displayDesc||'')+'</textarea>'+
+          '>'+(displayDesc||'')+'</textarea>'+
           '<div class="tech-rep-row">'+
           '<button class="btn-rep btn-minus" data-bid="'+bl.id+'" data-eg="'+eg+'" data-ei="'+ei+'"'+
           ' onclick="repClick(this,-1)">&#8722;</button>'+
@@ -3076,7 +3076,7 @@ function saveTechDescByEl(el){
   var val=el.value.trim();
   if(val) techDescs[realKey]=val;
   else delete techDescs[realKey];
-  el.classList.toggle('editing', !!val || document.activeElement===el);
+  // field is always visible — no display toggle needed
   saveState();
 }
 
