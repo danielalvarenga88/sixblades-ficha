@@ -668,7 +668,7 @@
     <img class="school-logo" id="header-logo" src="" alt="Logo">
   </div>
   <div class="school-tag" id="header-school">SixBlades Uberlândia · Augusto Maciel Team</div>
-  <div class="title">FICHA <span id="header-belt-name">FAIXA BRANCA</span></div>
+  <div class="title"><span id="header-belt-name">FAIXA BRANCA</span></div>
   <div class="subtitle" id="header-athlete">Acompanhamento técnico — Daniel</div>
   <div style="display:flex;justify-content:center;margin-top:6px">
     <div class="belt-badge" id="belt-badge" onclick="openSettings()" title="Alterar faixa">
@@ -1235,7 +1235,7 @@ function confirmarGrau(){
   renderGradHistory();
   renderCalendar();
   renderTimeline();
-  toast('&#127941; ' + n + 'o grau confirmado! Parabens!');
+  toast('🏅 ' + n + 'o grau confirmado! Parabens!');
 }
 
 function desfazerGrau(n){
@@ -1445,7 +1445,7 @@ function renderCalendar(){
         if(graduations[gn] && graduations[gn].date===k){
           var gmark=document.createElement('div');
           gmark.className='cal-grad-marker';
-          gmark.textContent='&#127941;';
+          gmark.innerHTML='&#127941;'; // medal emoji — must use innerHTML not textContent
           gmark.title=gn+'o grau recebido';
           el.appendChild(gmark);
           break;
@@ -2941,7 +2941,8 @@ function applyBeltTheme(){
   document.documentElement.style.setProperty('--belt-text',b.text);
   document.documentElement.style.setProperty('--belt-glow',b.glow);
   var nm='FAIXA '+b.name.toUpperCase();
-  var e1=document.getElementById('header-belt-name'); if(e1) e1.textContent=nm;
+  var e1=document.getElementById('header-belt-name');
+  if(e1){ e1.textContent=nm; e1.style.color=b.color; e1.style.textShadow=b.glow?('0 0 18px '+b.color):'none'; }
   var e2=document.getElementById('belt-badge-label'); if(e2) e2.textContent=nm;
   var badge=document.getElementById('belt-badge');
   if(badge){ badge.style.background=b.color; badge.style.color=b.text; }
