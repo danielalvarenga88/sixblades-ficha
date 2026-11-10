@@ -658,11 +658,93 @@
   .btn-rep-sm:active { background: var(--accent); border-color: var(--accent); color: white; }
   .btn-rep-sm.minus-sm:active { background: #374151; border-color: #4b5563; }
 
+
+  /* the two corner buttons (user chip + gear) need their own row so they never cover the school name */
+  .header{padding-top:40px}
+
+  /* ── HEADER USER CHIP ── */
+  .header-user{position:absolute;top:0;left:0;max-width:46%;height:34px;border-radius:17px;padding:0 11px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;gap:6px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:all 0.15s}
+  .header-user:active{background:var(--accent-glow);border-color:var(--accent)}
+  .header-user .hu-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .header-user .hu-caret{color:var(--muted);font-size:9px}
+
+  /* ── PROFILES MODAL ── */
+  #profiles-modal{z-index:975}
+  .prof-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .prof-row{display:flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+  .prof-row.active{border-color:var(--accent);background:var(--accent-glow)}
+  .prof-main{flex:1;min-width:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .prof-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prof-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px}
+  .prof-badge{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--green);background:var(--green-dim);border:1px solid rgba(34,197,94,0.25);border-radius:20px;padding:2px 8px;flex-shrink:0}
+  .prof-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:13px;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent}
+  .prof-btn:active{border-color:var(--accent);color:var(--accent)}
+  .prof-btn.del:active{border-color:var(--red);color:var(--red)}
+
+  /* ── EXAM / TOTAL GERAL ── */
+  .exame-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px}
+  .tg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  .tg-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 4px;text-align:center}
+  .tg-card.main{border-color:rgba(37,99,235,0.35);background:var(--accent-glow)}
+  .tg-val{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;color:var(--accent)}
+  .tg-card.gold .tg-val{color:var(--gold)}
+  .tg-card.green .tg-val{color:var(--green)}
+  .tg-lbl{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;line-height:1.3}
+  .exam-box{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+  .exam-box.due{border-color:rgba(201,168,76,0.5);background:var(--gold-dim)}
+  .exam-belts{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+  .exam-belt-chip{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:3px 11px 3px 8px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.5px;border:1px solid rgba(255,255,255,0.12)}
+  .exam-belt-chip i{width:8px;height:8px;border-radius:50%;background:rgba(128,128,128,0.45);display:inline-block}
+  .exam-arrow{color:var(--muted);font-size:14px}
+  .exam-info{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+  .exam-info strong{color:var(--text)}
+  .exam-date-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .exam-date-input{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:7px;color:var(--text);padding:7px 10px;outline:none;-webkit-appearance:none;min-width:150px}
+  .exam-date-input:focus{border-color:var(--accent)}
+  .exam-mini-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:9px 12px;border-radius:7px;border:1px solid var(--accent);background:var(--accent-glow);color:var(--accent);cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+  .exam-mini-btn.ghost{border-color:var(--border);background:none;color:var(--muted)}
+  .exam-countdown{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.5px;margin-top:10px}
+  .exam-countdown.due{color:var(--gold)}
+  .exam-countdown small{font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);margin-left:6px;letter-spacing:0}
+  .exam-result-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .exam-btn{flex:1;min-width:140px;padding:11px 10px;border-radius:8px;border:none;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.5px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .exam-btn.ok{background:linear-gradient(90deg,var(--green),#4ade80);color:#000}
+  .exam-btn.bad{background:var(--surface);color:var(--red);border:1px solid rgba(239,68,68,0.4)}
+  .exam-btn:active{opacity:0.75}
+  .exam-sub{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:var(--muted);margin:14px 0 8px}
+  .exam-log-item{display:flex;align-items:flex-start;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-bottom:6px;font-size:12px}
+  .exam-log-item .eli-main{flex:1;min-width:0}
+  .exam-log-item .eli-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);margin-top:2px}
+  .exam-log-item .eli-note{font-size:11px;color:var(--muted);margin-top:3px}
+  .bh-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+  .bh-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  .bh-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+  .bh-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .bh-stat{text-align:center;background:var(--surface);border-radius:6px;padding:6px 2px}
+  .bh-stat b{display:block;font-family:'Bebas Neue',sans-serif;font-size:18px;line-height:1;color:var(--text);font-weight:400}
+  .bh-stat span{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px}
+  .bh-grads{font-size:10px;color:var(--muted);margin-top:8px;line-height:1.6}
+  .bh-undo{margin-top:8px;font-size:10px;color:var(--muted);cursor:pointer;padding:4px 9px;border-radius:5px;border:1px solid var(--border);background:none;font-family:'JetBrains Mono',monospace;-webkit-tap-highlight-color:transparent}
+  .bh-undo:active{border-color:var(--red);color:var(--red)}
+  .exam-empty{font-size:11px;color:var(--muted);padding:4px 2px}
+  .cal-exam-marker{position:absolute;bottom:3px;left:3px;font-size:9px;line-height:1}
+
+  /* ── EXAM RESULT MODAL ── */
+  #exam-modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:965;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+  #exam-modal-overlay.open{opacity:1;pointer-events:all}
+  #exam-modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 20px;width:100%;max-width:380px;transform:scale(0.95);transition:transform 0.2s;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #exam-modal-overlay.open #exam-modal-box{transform:scale(1)}
+  .exam-modal-note{width:100%;min-height:54px;resize:vertical;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 10px;outline:none;-webkit-appearance:none}
+  .exam-modal-note:focus{border-color:var(--accent)}
+  .exam-modal-hint{font-size:11px;color:var(--muted);line-height:1.5;background:var(--surface2);border-radius:8px;padding:10px 12px;margin-bottom:14px}
+  .exam-modal-hint strong{color:var(--text)}
+
 </style>
 </head>
 <body>
 
 <div class="header">
+  <button class="header-user" onclick="openProfiles()" title="Trocar de usuario"><span>&#128100;</span><span class="hu-name" id="header-user-name">Daniel</span><span class="hu-caret">&#9662;</span></button>
   <button class="header-gear" onclick="openSettings()" title="Configuracoes">&#9881;</button>
   <div class="school-logo-wrap">
     <img class="school-logo" id="header-logo" src="" alt="Logo">
@@ -720,6 +802,7 @@
       <div class="settings-section">
         <div class="settings-section-title">Faixa Atual</div>
         <div class="belt-grid" id="belt-grid"></div>
+        <div style="font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5">Para trocar de faixa depois de um exame, use o painel <strong style="color:var(--text)">Exame de Faixa</strong> (a faixa anterior fica arquivada). Aqui você apenas corrige a faixa.</div>
         <div style="margin-top:14px">
           <label class="settings-label">Aulas por grau nesta faixa</label>
           <input class="belt-aulas-input" id="cfg-aulas-por-grau" type="number" min="1" max="200" value="40">
@@ -759,7 +842,7 @@
 
 <div class="progress-strip">
   <div class="stat-box"><div class="stat-value" id="st-dominadas">0</div><div class="stat-label">Dominadas</div></div>
-  <div class="stat-box"><div class="stat-value gold" id="st-reps">0</div><div class="stat-label">Reps totais</div></div>
+  <div class="stat-box"><div class="stat-value gold" id="st-reps">0</div><div class="stat-label">Reps na faixa</div></div>
   <div class="stat-box"><div class="stat-value" id="st-pct">0%</div><div class="stat-label">Preparação</div></div>
   <div style="grid-column:1/-1">
     <div class="bar-label"><span>Domínio técnico geral</span><span id="st-pct-bar">0%</span></div>
@@ -790,7 +873,7 @@
 <div class="draggable-panel" id="panel-aula" ondragover="panelDragOver(event,'aula')" ondrop="panelDrop(event,'aula')">
 <div class="panel-drag-handle" draggable="true" ontouchstart="touchDragStart(event,'aula')" ontouchend="touchDragEnd(event)" ontouchmove="touchDragMove(event)" ondragstart="panelDragStart(event,'aula')" ondragend="panelDragEnd(event)" title="Arraste para reordenar"><div class="panel-drag-handle-dots"><span><b></b><b></b></span><span><b></b><b></b></span><span><b></b><b></b></span></div></div>
 <div class="aula-section">
-  <div class="section-title"><span></span>Ciclo de Aulas — Graus na Faixa Branca</div>
+  <div class="section-title"><span></span>Ciclo de Aulas — Graus na <span id="aula-belt-label" style="color:inherit">Faixa Branca</span></div>
 
   <!-- G1 -->
   <div class="grade-row-wrap" id="wrap-g1">
@@ -826,7 +909,7 @@
   </div>
 
   <div style="margin-top:10px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);padding-top:9px">
-    &#9733; Ao completar o 4º grau o exame pode ser marcado com o Sensei Augusto.
+    &#9733; Ao completar o 4º grau o exame pode ser marcado com <span id="aula-sensei-label">o Sensei</span>.
     <span id="aulas-hint" style="color:var(--accent);margin-left:4px"></span>
   </div>
 </div>
@@ -835,6 +918,19 @@
 <div class="grad-history-section" id="grad-history-section">
   <div class="section-title"><span></span>Histórico de Graduações</div>
   <div class="grad-history-list" id="grad-history-list"></div>
+</div>
+</div>
+
+<div class="draggable-panel" id="panel-exame" ondragover="panelDragOver(event,'exame')" ondrop="panelDrop(event,'exame')">
+<div class="panel-drag-handle" draggable="true" ontouchstart="touchDragStart(event,'exame')" ontouchend="touchDragEnd(event)" ontouchmove="touchDragMove(event)" ondragstart="panelDragStart(event,'exame')" ondragend="panelDragEnd(event)" title="Arraste para reordenar"><div class="panel-drag-handle-dots"><span><b></b><b></b></span><span><b></b><b></b></span><span><b></b><b></b></span></div></div>
+<div class="exame-section">
+  <div class="section-title"><span></span>Exame de Faixa e Total Geral</div>
+  <div class="tg-grid" id="tg-grid"></div>
+  <div class="exam-box" id="exam-box"></div>
+  <div class="exam-sub">Histórico de exames</div>
+  <div id="exam-log-list"></div>
+  <div class="exam-sub">Faixas anteriores</div>
+  <div id="belt-history-list"></div>
 </div>
 </div>
 
@@ -1019,6 +1115,74 @@
 </div>
 
 
+<!-- PROFILES MODAL -->
+<div class="modal-overlay" id="profiles-modal">
+  <div class="modal-sheet" style="max-height:88vh">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-title">&#128100; USUÁRIOS</div>
+      <button class="modal-close" onclick="closeProfiles()">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <div class="settings-section-title">Toque em um usuário para alternar</div>
+      <div class="prof-list" id="prof-list"></div>
+      <div class="settings-section" style="border-bottom:none">
+        <div class="settings-section-title">Novo usuário</div>
+        <div class="settings-field">
+          <label class="settings-label" for="new-prof-name">Nome</label>
+          <input class="settings-input" id="new-prof-name" type="text" placeholder="Nome do aluno">
+        </div>
+        <div class="settings-field">
+          <label class="settings-label" for="new-prof-belt">Faixa inicial</label>
+          <select class="settings-input" id="new-prof-belt" style="-webkit-appearance:menulist;appearance:menulist">
+            <option value="branca">Branca</option>
+            <option value="azul">Azul</option>
+            <option value="roxa">Roxa</option>
+            <option value="marrom">Marrom</option>
+            <option value="preta">Preta</option>
+          </select>
+        </div>
+        <button class="settings-save-btn" onclick="createProfile()">CRIAR E ALTERNAR</button>
+        <div style="font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">Cada usuário tem calendário, técnicas, anotações, graduações e exames próprios. Escola, Sensei e logo são compartilhados.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM RESULT MODAL -->
+<div id="exam-modal-overlay">
+  <div id="exam-modal-box">
+    <div class="grad-modal-icon" id="exam-modal-icon">&#127942;</div>
+    <div class="grad-modal-title" id="exam-modal-title">Resultado do exame</div>
+    <div class="grad-modal-sub" id="exam-modal-sub"></div>
+    <div class="grad-modal-field">
+      <label class="grad-modal-label" for="exam-modal-date">Data do exame</label>
+      <input type="date" class="grad-modal-date" id="exam-modal-date">
+    </div>
+    <div id="exam-modal-approved">
+      <div class="exam-modal-hint" id="exam-modal-hint"></div>
+      <div class="grad-modal-field">
+        <label class="grad-modal-label" for="exam-modal-apg">Aulas por grau na nova faixa</label>
+        <input type="number" class="grad-modal-date" id="exam-modal-apg" min="1" max="200" value="40">
+      </div>
+    </div>
+    <div id="exam-modal-failed" style="display:none">
+      <div class="grad-modal-field">
+        <label class="grad-modal-label" for="exam-modal-newdate">Nova data do exame (opcional)</label>
+        <input type="date" class="grad-modal-date" id="exam-modal-newdate">
+      </div>
+    </div>
+    <div class="grad-modal-field">
+      <label class="grad-modal-label" for="exam-modal-obs">Observação (opcional)</label>
+      <textarea class="exam-modal-note" id="exam-modal-obs" placeholder="Feedback do Sensei, pontos a melhorar..."></textarea>
+    </div>
+    <div class="grad-modal-actions">
+      <button class="grad-modal-btn cancel" onclick="closeExamModal()">Cancelar</button>
+      <button class="grad-modal-btn confirm" id="exam-modal-confirm" onclick="confirmExamResult()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
 <!-- GRAD CONFIRM MODAL -->
 <div id="grad-modal-overlay">
   <div id="grad-modal-box">
@@ -1027,7 +1191,7 @@
     <div class="grad-modal-sub" id="grad-modal-sub">Informe a data em que recebeu o grau</div>
     <div class="grad-modal-field">
       <label class="grad-modal-label" for="grad-modal-date-input">Data da graduacao</label>
-      <input type="date" class="grad-modal-date" id="grad-modal-date-input">
+      <input type="date" class="grad-modal-date" id="grad-modal-date-input" onchange="updateGradModalStats()">
     </div>
     <div class="grad-modal-info">
       <div class="grad-modal-stat">
@@ -1122,6 +1286,19 @@ var cfg = {
   aulasPorGrau: 40
 };
 
+// Belt cycle / exam state (per profile)
+var cycleStart  = '';   // 'YYYY-MM-DD': only sessions AFTER this date count for the current belt ('' = from the beginning)
+var examDate    = '';   // scheduled belt exam date
+var examLog     = [];   // [{date,result:'aprovado'|'reprovado',belt,toBelt,note}]
+var beltHistory = [];   // archived belt cycles
+
+// Multi-profile (school, sensei and logo are shared by every profile)
+var DEFAULT_SHARED = {school:'SixBlades Uberlândia', sensei:'Augusto Maciel', logo:''};
+var shared        = {school:DEFAULT_SHARED.school, sensei:DEFAULT_SHARED.sensei, logo:''};
+var profilesStore = {};      // id -> {name, data}
+var profileOrder  = ['p1'];
+var activeId      = 'p1';
+
 function K(b,g,i){ return b+'|'+g+'|'+i; }
 function mastered(k){ return (reps[k]||0) >= META; }
 function stage(n){ return n===0?'s0':n<20?'s1':n<30?'s2':'s3'; }
@@ -1129,11 +1306,19 @@ function dayKey(y,m,d){ return y+'-'+(m+1<10?'0':'')+(m+1)+'-'+(d<10?'0':'')+d; 
 function todayKey(){ var t=new Date(); return dayKey(t.getFullYear(),t.getMonth(),t.getDate()); }
 function calGoToday(){ var t=new Date(); calYear=t.getFullYear(); calMonth=t.getMonth(); }
 
-function totalSessions(){
+// Sessions with date AFTER 'from' (exclusive) and up to 'to' (inclusive). Empty bound = open.
+function sessionsBetween(from, to){
   var s=0, keys=Object.keys(trainDays);
-  for(var i=0;i<keys.length;i++) s+=trainDays[keys[i]]||0;
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];
+    if(from && k<=from) continue;
+    if(to && k>to) continue;
+    s+=trainDays[k]||0;
+  }
   return s;
 }
+function allSessions(){ return sessionsBetween('',''); }            // grand total (all belts)
+function totalSessions(){ return sessionsBetween(cycleStart,''); }  // sessions of the current belt cycle
 function monthSessions(y,m){
   var s=0, days=new Date(y,m+1,0).getDate();
   for(var d=1;d<=days;d++) s+=trainDays[dayKey(y,m,d)]||0;
@@ -1144,102 +1329,103 @@ function monthSessions(y,m){
 // graduations[n].totalAulas = cumulative sessions at time of receiving grade n.
 // Grade n+1 cycle starts from that point.
 
-function getGradeStart(n){
-  // Returns the cumulative session count at which grade n cycle started.
-  // Grade 1 starts at 0. Grade 2 starts when grade 1 was received, etc.
-  if(n <= 1) return 0;
-  var prev = graduations[n-1];
-  if(prev && prev.totalAulas) return prev.totalAulas;
-  // Fall back to fixed 40 * (n-1) if not recorded
-  return 40 * (n - 1);
+function curAPG(){ return cfg.aulasPorGrau || 40; }
+
+// Graduation numbers are derived from their dates, so they stay correct even when
+// past training days are added or removed in the calendar afterwards.
+function recomputeGradStats(){
+  var prevCum=0;
+  for(var n=1;n<=4;n++){
+    var g=graduations[n];
+    if(!g || !g.date) break;
+    var cum=sessionsBetween(cycleStart, g.date);
+    g.totalAulas=cum;
+    g.aulasNoCiclo=Math.max(0, cum-prevCum);
+    prevCum=cum;
+  }
 }
 
-function sessionsInGrade(n){
-  // Sessions accumulated since the start of grade n cycle
-  return Math.max(0, totalSessions() - getGradeStart(n));
+function getGradeStart(n){
+  if(n<=1) return 0;
+  var prev=graduations[n-1];
+  if(prev && prev.totalAulas!==undefined) return prev.totalAulas;
+  return curAPG()*(n-1);
 }
+
+function sessionsInGrade(n){ return Math.max(0, totalSessions()-getGradeStart(n)); }
 
 function gradeProgress(){
-  var tot = totalSessions();
-  // For each grade: sessions since that grade's cycle started
-  var g1s = getGradeStart(1); // always 0
-  var g2s = getGradeStart(2);
-  var g3s = getGradeStart(3);
-  var g4s = getGradeStart(4);
-
-  var APG = cfg.aulasPorGrau || 40;
-  var g1 = graduations[1] ? APG : Math.min(tot - g1s, APG);
-  var g2 = graduations[2] ? APG : (graduations[1] ? Math.min(tot - g2s, APG) : Math.min(Math.max(tot - APG, 0), APG));
-  var g3 = graduations[3] ? APG : (graduations[2] ? Math.min(tot - g3s, APG) : Math.min(Math.max(tot - APG*2, 0), APG));
-  var g4 = graduations[4] ? APG : (graduations[3] ? Math.min(tot - g4s, APG) : Math.min(Math.max(tot - APG*3, 0), APG));
-
-  return {
-    g1: Math.max(0, g1),
-    g2: Math.max(0, g2),
-    g3: Math.max(0, g3),
-    g4: Math.max(0, g4),
-    total: tot,
-    // raw counts since each cycle start (can exceed 40)
-    raw1: Math.max(0, tot - g1s),
-    raw2: graduations[1] ? Math.max(0, tot - g2s) : Math.max(0, tot - 40),
-    raw3: graduations[2] ? Math.max(0, tot - g3s) : Math.max(0, tot - 80),
-    raw4: graduations[3] ? Math.max(0, tot - g4s) : Math.max(0, tot - 120)
-  };
+  recomputeGradStats();
+  var tot=totalSessions(), APG=curAPG();
+  var out={total:tot};
+  for(var n=1;n<=4;n++){
+    var r;
+    if(graduations[n]) r=graduations[n].aulasNoCiclo||0;
+    else if(n===1 || graduations[n-1]) r=Math.max(0, tot-getGradeStart(n));
+    else r=Math.max(0, tot-APG*(n-1));
+    out['raw'+n]=r;
+    out['g'+n]=graduations[n] ? APG : Math.min(r, APG);
+  }
+  return out;
 }
 
 var gradModalN = 0; // which grade is being confirmed
 
+function gradModalRawFor(n, dateVal){
+  var cum=sessionsBetween(cycleStart, dateVal);
+  return Math.max(0, cum-getGradeStart(n));
+}
+
+function updateGradModalStats(){
+  if(!gradModalN) return;
+  var dv=document.getElementById('grad-modal-date-input').value || todayKey();
+  var APG=curAPG();
+  var raw=gradModalRawFor(gradModalN, dv);
+  var exc=Math.max(0, raw-APG);
+  document.getElementById('grad-modal-aulas').textContent=raw;
+  document.getElementById('grad-modal-meta').textContent=APG;
+  document.getElementById('grad-modal-exc').textContent=exc;
+  document.getElementById('grad-modal-exc').style.color=exc>0?'var(--orange)':'var(--muted)';
+}
+
 function receberGrau(n){
-  var tot = totalSessions();
-  if(tot < 1){ toast('Nenhuma sessao registrada ainda.'); return; }
-  if(graduations[n]){ toast('Grau ' + n + ' ja foi recebido.'); return; }
-  if(n > 1 && !graduations[n-1]){ toast('Receba o ' + (n-1) + 'o grau primeiro.'); return; }
-
-  gradModalN = n;
-  var raw = gradeProgress()['raw'+n];
-  var exc = Math.max(0, raw - 40);
-
-  // Populate modal
-  document.getElementById('grad-modal-title').textContent = n + 'o Grau Conquistado!';
-  document.getElementById('grad-modal-sub').textContent   = 'Informe a data em que recebeu o grau';
-  document.getElementById('grad-modal-aulas').textContent = raw;
-  document.getElementById('grad-modal-exc').textContent   = exc;
-  document.getElementById('grad-modal-exc').style.color   = exc > 0 ? 'var(--orange)' : 'var(--muted)';
-  // Default date = today, but allow any past date
-  document.getElementById('grad-modal-date-input').value  = todayKey();
-  document.getElementById('grad-modal-date-input').max    = todayKey();
-
+  if(totalSessions()<1){ toast('Nenhuma sessao registrada ainda.'); return; }
+  if(graduations[n]){ toast('Grau '+n+' ja foi recebido.'); return; }
+  if(n>1 && !graduations[n-1]){ toast('Receba o '+(n-1)+'o grau primeiro.'); return; }
+  gradModalN=n;
+  document.getElementById('grad-modal-title').textContent=n+'o Grau Conquistado!';
+  document.getElementById('grad-modal-sub').textContent='Informe a data em que recebeu o grau';
+  var di=document.getElementById('grad-modal-date-input');
+  di.max=todayKey();
+  di.value=todayKey();
+  updateGradModalStats();
   document.getElementById('grad-modal-overlay').classList.add('open');
 }
 
 function closeGradModal(){
   document.getElementById('grad-modal-overlay').classList.remove('open');
-  gradModalN = 0;
+  gradModalN=0;
 }
 
 function confirmarGrau(){
   if(!gradModalN) return;
-  var n   = gradModalN;
-  var dateInput = document.getElementById('grad-modal-date-input');
-  var dateVal   = dateInput.value;
+  var n=gradModalN;
+  var dateVal=document.getElementById('grad-modal-date-input').value;
   if(!dateVal){ toast('Selecione a data da graduacao.'); return; }
-  if(dateVal > todayKey()){ toast('A data nao pode ser no futuro.'); return; }
-
-  var tot = totalSessions();
-  var raw = gradeProgress()['raw'+n];
-
-  graduations[n] = { date: dateVal, totalAulas: tot, aulasNoCiclo: raw };
+  if(dateVal>todayKey()){ toast('A data nao pode ser no futuro.'); return; }
+  if(cycleStart && dateVal<=cycleStart){ toast('A data deve ser posterior ao inicio da faixa atual.'); return; }
+  if(n>1 && graduations[n-1] && dateVal<graduations[n-1].date){ toast('A data deve ser posterior ao '+(n-1)+'o grau.'); return; }
+  graduations[n]={date:dateVal};
+  recomputeGradStats();
   saveState();
   closeGradModal();
-  updateAulas();
-  renderGradHistory();
-  renderCalendar();
-  renderTimeline();
-  toast('🏅 ' + n + 'o grau confirmado! Parabens!');
+  updateAulas(); renderGradHistory(); renderCalendar(); renderTimeline();
+  toast('\uD83C\uDFC5 '+n+'o grau confirmado! Parabens!');
 }
 
 function desfazerGrau(n){
   if(!graduations[n]) return;
+  if(graduations[n+1]){ toast('Desfaca primeiro o '+(n+1)+'o grau.'); return; }
   if(!confirm('Desfazer o recebimento do '+n+'o grau? Os dados do ciclo serao restaurados.')) return;
   delete graduations[n];
   saveState();
@@ -1249,69 +1435,135 @@ function desfazerGrau(n){
   renderTimeline();
   toast('Graduacao ' + n + 'o grau desfeita.');
 }
-function gradeBand(cum){
-  if(cum<=40)  return 'g1';
-  if(cum<=80)  return 'g2';
-  if(cum<=120) return 'g3';
+function cycleBoundaries(){
+  var b=[];
+  for(var i=0;i<beltHistory.length;i++) if(beltHistory[i].endDate) b.push(beltHistory[i].endDate);
+  b.sort();
+  return b;
+}
+function apgForDay(k){
+  var h=beltHistory.slice().sort(function(a,b){ return a.endDate<b.endDate?-1:(a.endDate>b.endDate?1:0); });
+  for(var i=0;i<h.length;i++){ if(k<=h[i].endDate) return h[i].aulasPorGrau||40; }
+  return curAPG();
+}
+function gradeBand(cum, apg){
+  var a=apg||curAPG();
+  if(cum<=a)   return 'g1';
+  if(cum<=a*2) return 'g2';
+  if(cum<=a*3) return 'g3';
   return 'g4';
 }
+// Cumulative sessions per day, restarting at every belt change
 function buildCumulativeMap(){
   var keys=Object.keys(trainDays).filter(function(k){ return trainDays[k]>0; }).sort();
-  var map={}, cum=0;
-  for(var i=0;i<keys.length;i++){ cum+=trainDays[keys[i]]; map[keys[i]]=cum; }
+  var bounds=cycleBoundaries(), bi=0, map={}, cum=0;
+  for(var i=0;i<keys.length;i++){
+    var moved=false;
+    while(bi<bounds.length && keys[i]>bounds[bi]){ bi++; moved=true; }
+    if(moved) cum=0;
+    cum+=trainDays[keys[i]];
+    map[keys[i]]=cum;
+  }
   return map;
 }
 
-// ── STORAGE ───────────────────────────────────────────────────────────────────
+// ── STORAGE (multi-profile) ───────────────────────────────────────────────────
+var PRE_MULTI_KEY='sixblades_pre_multiuser_backup';
+
+function newProfileId(){ return 'p'+Date.now().toString(36)+Math.floor(Math.random()*46656).toString(36); }
+
+function collectProfileData(){
+  return {
+    reps:reps, regrasOk:regrasOk, freq:freq, trainDays:trainDays, notes:notes,
+    techNames:techNames, techDescs:techDescs, customTechs:customTechs, graduations:graduations,
+    cfg:{athlete:cfg.athlete, belt:cfg.belt, aulasPorGrau:cfg.aulasPorGrau},
+    cycleStart:cycleStart, examDate:examDate, examLog:examLog, beltHistory:beltHistory
+  };
+}
+
+function loadProfileData(d){
+  d=d||{};
+  reps=d.reps||{}; regrasOk=d.regrasOk||{}; freq=d.freq||4; trainDays=d.trainDays||{};
+  notes=d.notes||{}; techNames=d.techNames||{}; techDescs=d.techDescs||{}; customTechs=d.customTechs||{};
+  graduations=d.graduations||{};
+  var pc=d.cfg||{};
+  cfg.athlete=(pc.athlete!==undefined)?pc.athlete:'';
+  cfg.belt=pc.belt||'branca';
+  cfg.aulasPorGrau=pc.aulasPorGrau||40;
+  cycleStart=d.cycleStart||''; examDate=d.examDate||''; examLog=d.examLog||[]; beltHistory=d.beltHistory||[];
+  cfg.school=shared.school; cfg.sensei=shared.sensei; cfg.logo=shared.logo;
+}
+
+function commitActiveProfile(){
+  shared.school=cfg.school; shared.sensei=cfg.sensei; shared.logo=cfg.logo;
+  var prev=profilesStore[activeId];
+  var name=(cfg.athlete||'').trim() || (prev&&prev.name) || 'Usuario';
+  profilesStore[activeId]={name:name, data:collectProfileData()};
+}
+
 function stateToJSON(){
-  return JSON.stringify({reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,notes:notes,techNames:techNames,techDescs:techDescs,customTechs:customTechs,graduations:graduations,cfg:cfg,_v:10});
+  commitActiveProfile();
+  return JSON.stringify({_v:11, shared:shared, activeId:activeId, order:profileOrder, profiles:profilesStore});
 }
+
 function applyState(d){
-  reps         = d.reps         || {};
-  regrasOk     = d.regrasOk     || {};
-  freq         = d.freq         || 4;
-  trainDays    = d.trainDays    || {};
-  notes        = d.notes        || {};
-  techNames    = d.techNames    || {};
-  techDescs    = d.techDescs    || {};
-  customTechs  = d.customTechs  || {};
-  graduations  = d.graduations  || {};
-  if(d.cfg){ for(var ck in d.cfg){ cfg[ck]=d.cfg[ck]; } }
+  d=d||{};
+  var ids=d.profiles?Object.keys(d.profiles):[];
+  if(ids.length){
+    var sh=d.shared||{};
+    shared.school=(sh.school!==undefined)?sh.school:DEFAULT_SHARED.school;
+    shared.sensei=(sh.sensei!==undefined)?sh.sensei:DEFAULT_SHARED.sensei;
+    shared.logo=sh.logo||'';
+    profilesStore=d.profiles;
+    profileOrder=(d.order||[]).filter(function(id){ return profilesStore[id]; });
+    for(var i=0;i<ids.length;i++){ if(profileOrder.indexOf(ids[i])<0) profileOrder.push(ids[i]); }
+    activeId=(d.activeId && profilesStore[d.activeId])?d.activeId:profileOrder[0];
+    loadProfileData(profilesStore[activeId].data);
+  } else {
+    // legacy single-profile format (versions up to v10): becomes the first profile
+    var pc=d.cfg||{};
+    shared.school=(pc.school!==undefined)?pc.school:DEFAULT_SHARED.school;
+    shared.sensei=(pc.sensei!==undefined)?pc.sensei:DEFAULT_SHARED.sensei;
+    shared.logo=pc.logo||'';
+    profilesStore={}; profileOrder=['p1']; activeId='p1';
+    loadProfileData(d);
+    if(pc.athlete===undefined) cfg.athlete='Daniel';
+  }
 }
+
 function loadState(){
-  // 1. Try permanent key first
+  // 1. permanent key
   try{
     var raw=localStorage.getItem(LS_KEY);
     if(raw){
-      applyState(JSON.parse(raw));
+      var parsed=JSON.parse(raw);
+      var isLegacy=!parsed.profiles;
+      if(isLegacy){
+        // safety copy of the single-profile data before the first write in the new format
+        try{ if(!localStorage.getItem(PRE_MULTI_KEY)) localStorage.setItem(PRE_MULTI_KEY, raw); }catch(e3){}
+      }
+      applyState(parsed);
       setStatus('ok');
+      if(isLegacy) saveState();
       return;
     }
   }catch(e){}
-
-  // 2. Try legacy keys — migrate automatically
+  // 2. older keys: migrate automatically
   for(var li=0;li<LEGACY_KEYS.length;li++){
     try{
       var old=localStorage.getItem(LEGACY_KEYS[li]);
       if(old){
-        var parsed=JSON.parse(old);
-        applyState(parsed);
-        // Migrate to new permanent key
-        localStorage.setItem(LS_KEY, JSON.stringify({
-          reps:reps,regrasOk:regrasOk,freq:freq,trainDays:trainDays,
-          notes:notes,techNames:techNames,graduations:graduations,_v:9
-        }));
-        // Remove old key
+        applyState(JSON.parse(old));
+        localStorage.setItem(LS_KEY, stateToJSON());
         try{ localStorage.removeItem(LEGACY_KEYS[li]); }catch(e2){}
         setStatus('ok');
-        setTimeout(function(){
-          toast('Dados migrados da versao anterior!');
-        }, 1200);
+        setTimeout(function(){ toast('Dados migrados da versao anterior!'); }, 1200);
         return;
       }
     }catch(e){}
   }
 }
+
 var saveTimer=null;
 function saveState(){
   setStatus('saving');
@@ -1369,7 +1621,7 @@ function renderCalendar(){
   var today=todayKey();
   document.getElementById('cal-month-label').textContent=MONTHS[calMonth]+' '+calYear;
   document.getElementById('cal-mes').textContent=monthSessions(calYear,calMonth);
-  document.getElementById('cal-total').textContent=totalSessions();
+  document.getElementById('cal-total').textContent=allSessions();
 
   // streaks
   var allKeys=Object.keys(trainDays).filter(function(k){ return trainDays[k]>0; }).sort();
@@ -1434,7 +1686,7 @@ function renderCalendar(){
         var cum=cumMap[k]||0;
         if(cum>0){
           var band=document.createElement('div');
-          band.className='cal-day-band band-'+gradeBand(cum);
+          band.className='cal-day-band band-'+gradeBand(cum, apgForDay(k));
           el.appendChild(band);
         }
       }
@@ -1450,6 +1702,19 @@ function renderCalendar(){
           el.appendChild(gmark);
           break;
         }
+      }
+      // Exam markers (scheduled date + registered results)
+      var exm='';
+      if(examDate===k) exm='&#129355;';
+      for(var xi=0;xi<examLog.length;xi++){
+        if(examLog[xi].date===k) exm=(examLog[xi].result==='aprovado')?'&#9989;':'&#10060;';
+      }
+      if(exm){
+        var xmark=document.createElement('div');
+        xmark.className='cal-exam-marker';
+        xmark.innerHTML=exm;
+        xmark.title='Exame de faixa';
+        el.appendChild(xmark);
       }
       // Note indicator dot
       if(notes[k] && (notes[k].treino||notes[k].dific||notes[k].obs||(notes[k].techs&&notes[k].techs.length>0))){
@@ -1515,160 +1780,116 @@ function calNext(){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCal
 // ── GRADE BARS ────────────────────────────────────────────────────────────────
 function updateAulas(){
   var gp  = gradeProgress();
+  var APG = curAPG();
   var apw = freq < 0.5 ? 0.5 : freq;
-  var MNAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 
-  function fmtDate(d){
-    if(!d) return '';
-    var p=d.split('-');
-    return parseInt(p[2],10)+' '+MNAMES[parseInt(p[1],10)-1]+'/'+p[0];
-  }
-
-  function setGrade(n, progressVal, rawVal, barCls){
+  function setGrade(n, rawVal, barCls){
     var bar    = document.getElementById('bar-g'+n);
     var txt    = document.getElementById('txt-g'+n);
     var wrap   = document.getElementById('wrap-g'+n);
     var detail = document.getElementById('detail-g'+n);
     var grad   = graduations[n];
     var prevGrad = n > 1 ? graduations[n-1] : true; // grade 1 always available
-
-    // Determine if this grade cycle is active/available
     var isActive = !!prevGrad;
     var isDone   = !!grad;
 
     if(wrap) wrap.style.opacity = isActive ? '1' : '0.35';
 
-    // Bar display
     if(isDone){
       bar.style.width = '100%';
       bar.className   = 'mini-bar-fill done';
-      txt.textContent = grad.aulasNoCiclo + '/40';
+      txt.textContent = grad.aulasNoCiclo + '/' + APG;
     } else if(isActive && rawVal > 0){
-      var pct = Math.min(rawVal / 40 * 100, 100);
-      bar.style.width = pct + '%';
+      bar.style.width = Math.min(rawVal / APG * 100, 100) + '%';
       bar.className   = 'mini-bar-fill ' + barCls;
-      txt.textContent = rawVal + '/40';
+      txt.textContent = rawVal + '/' + APG;
     } else {
       bar.style.width = '0%';
       bar.className   = 'mini-bar-fill empty';
-      txt.textContent = '0/40';
+      txt.textContent = '0/' + APG;
     }
 
-    // Detail row
     if(!detail) return;
     if(!isActive){ detail.innerHTML = ''; return; }
 
-    var detailHtml = '';
+    var h = '';
     if(isDone){
-      // Show: aulas no ciclo, data, excedente, undo button
-      var exc = grad.aulasNoCiclo - 40;
-      detailHtml  = '<span class="grade-data-badge">&#10003; Recebido em ' + fmtDate(grad.date) + '</span>';
-      detailHtml += '<span class="grade-detail-stat">Aulas no ciclo: <strong>' + grad.aulasNoCiclo + '</strong></span>';
-      if(exc > 0) detailHtml += '<span class="grade-detail-stat" style="color:var(--orange)">+' + exc + ' excedente(s)</span>';
-      detailHtml += '<button class="grad-undo-btn" onclick="desfazerGrau('+n+')">&#8617; Desfazer</button>';
+      var exc = grad.aulasNoCiclo - APG;
+      h  = '<span class="grade-data-badge">&#10003; Recebido em ' + fmtDayBR(grad.date) + '</span>';
+      h += '<span class="grade-detail-stat">Aulas no ciclo: <strong>' + grad.aulasNoCiclo + '</strong></span>';
+      if(exc > 0) h += '<span class="grade-detail-stat" style="color:var(--orange)">+' + exc + ' excedente(s)</span>';
+      h += '<button class="grad-undo-btn" onclick="desfazerGrau('+n+')">&#8617; Desfazer</button>';
     } else {
-      // Show: current count + button if >= 40 or allow early
-      var canConquer = rawVal >= 38; // enable from 38 (Sensei decides timing)
-      detailHtml += '<span class="grade-detail-stat">Ciclo atual: <strong>' + rawVal + '/40</strong> aulas</span>';
-      if(rawVal > 40){
-        detailHtml += '<span class="grade-detail-stat" style="color:var(--orange)">+' + (rawVal-40) + ' alem da meta</span>';
-      }
-      detailHtml += '<button class="grade-conquistado-btn' + (canConquer?'':' disabled') + '" '+
-        'onclick="' + (canConquer?'receberGrau('+n+')':'') + '"' +
-        (canConquer?'':' title="Disponivel a partir de 38 aulas"') +
-        '>&#127941; Grau Conquistado</button>';
+      var can = rawVal >= APG - 2; // enabled a little before the goal (Sensei decides the timing)
+      h += '<span class="grade-detail-stat">Ciclo atual: <strong>' + rawVal + '/' + APG + '</strong> aulas</span>';
+      if(rawVal > APG) h += '<span class="grade-detail-stat" style="color:var(--orange)">+' + (rawVal-APG) + ' alem da meta</span>';
+      h += '<button class="grade-conquistado-btn' + (can?'':' disabled') + '" ' +
+           (can ? 'onclick="receberGrau('+n+')"' : 'onclick=""') +
+           (can ? '' : ' title="Disponivel a partir de ' + (APG-2) + ' aulas"') +
+           '>&#127941; Grau Conquistado</button>';
     }
-    detail.innerHTML = detailHtml;
+    detail.innerHTML = h;
   }
 
-  setGrade(1, gp.g1, gp.raw1, 'ag1');
-  setGrade(2, gp.g2, gp.raw2, 'ag2');
-  setGrade(3, gp.g3, gp.raw3, 'ag3');
-  setGrade(4, gp.g4, gp.raw4, 'ag4');
+  setGrade(1, gp.raw1, 'ag1');
+  setGrade(2, gp.raw2, 'ag2');
+  setGrade(3, gp.raw3, 'ag3');
+  setGrade(4, gp.raw4, 'ag4');
 
   var hint = document.getElementById('aulas-hint');
   if(hint){
-    if(gp.g4 >= 40 && graduations[4]){
-      hint.textContent = '4 grau concluido — agende o exame!';
-      hint.style.color = 'var(--green)';
-    } else if(!graduations[1] && gp.raw1 < 40){
-      hint.textContent = 'Faltam ' + (40 - gp.raw1) + ' sessoes para o 1 grau';
-      hint.style.color = 'var(--muted)';
-    } else if(!graduations[2] && gp.raw2 < 40){
-      hint.textContent = 'Faltam ' + (40 - gp.raw2) + ' sessoes para o 2 grau (~' + Math.ceil((40 - gp.raw2) / apw) + ' sem.)';
-      hint.style.color = 'var(--accent)';
-    } else if(!graduations[3] && gp.raw3 < 40){
-      hint.textContent = 'Faltam ' + (40 - gp.raw3) + ' sessoes para o 3 grau';
-      hint.style.color = 'var(--gold)';
-    } else if(!graduations[4]){
-      hint.textContent = 'Faltam ' + Math.max(0, 40 - gp.raw4) + ' sessoes para o 4 grau';
-      hint.style.color = 'var(--green)';
-    } else {
-      hint.textContent = '';
-    }
+    var t = '', col = 'var(--muted)';
+    if(graduations[4]){ t = '4º grau concluído — agende o exame!'; col = 'var(--green)'; }
+    else if(!graduations[1]){ t = 'Faltam ' + Math.max(0, APG - gp.raw1) + ' sessões para o 1º grau'; col = 'var(--muted)'; }
+    else if(!graduations[2]){ var f2 = Math.max(0, APG - gp.raw2); t = 'Faltam ' + f2 + ' sessões para o 2º grau (~' + Math.ceil(f2 / apw) + ' sem.)'; col = 'var(--accent)'; }
+    else if(!graduations[3]){ t = 'Faltam ' + Math.max(0, APG - gp.raw3) + ' sessões para o 3º grau'; col = 'var(--gold)'; }
+    else { t = 'Faltam ' + Math.max(0, APG - gp.raw4) + ' sessões para o 4º grau'; col = 'var(--green)'; }
+    hint.textContent = t;
+    hint.style.color = col;
   }
 
   renderGradHistory();
   renderTimeline();
+  renderExame();
 }
 
 function renderGradHistory(){
   var list = document.getElementById('grad-history-list');
   if(!list) return;
-  var MNAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  function fmtDate(d){
-    if(!d) return '—';
-    var p=d.split('-');
-    return parseInt(p[2],10)+' de '+MNAMES[parseInt(p[1],10)-1]+' de '+p[0];
-  }
+  var APG  = curAPG();
   var gp   = gradeProgress();
   var raws = [0, gp.raw1, gp.raw2, gp.raw3, gp.raw4];
   var labels = ['','1º Grau','2º Grau','3º Grau','4º Grau'];
-  var badges  = ['','&#9711;','&#9711;','&#9711;','&#9733;'];
 
   var html = '';
   var prevAvail = true;
   for(var n=1; n<=4; n++){
     var grad = graduations[n];
     var raw  = raws[n];
-    var exc  = grad ? (grad.aulasNoCiclo - 40) : 0;
+    var exc  = grad ? (grad.aulasNoCiclo - APG) : 0;
 
     if(grad){
-      // Done card
       html += '<div class="grad-card done">';
-      html += '<div class="grad-card-header">';
-      html += '<div class="grad-card-title">'+labels[n]+'</div>';
-      html += '<div class="grad-card-badge">&#127941;</div>';
-      html += '</div>';
+      html += '<div class="grad-card-header"><div class="grad-card-title">'+labels[n]+'</div><div class="grad-card-badge">&#127941;</div></div>';
       html += '<div class="grad-card-stats">';
       html += '<div class="grad-stat"><div class="grad-stat-val ok">'+grad.aulasNoCiclo+'</div><div class="grad-stat-lbl">Aulas no ciclo</div></div>';
-      html += '<div class="grad-stat"><div class="grad-stat-val '+(exc>0?'over':'ok')+'">'+exc+'</div><div class="grad-stat-lbl">Excedente</div></div>';
-      html += '<div class="grad-stat"><div class="grad-stat-val ok">40</div><div class="grad-stat-lbl">Meta</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val '+(exc>0?'over':'ok')+'">'+Math.max(0,exc)+'</div><div class="grad-stat-lbl">Excedente</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val ok">'+APG+'</div><div class="grad-stat-lbl">Meta</div></div>';
       html += '</div>';
-      html += '<div class="grad-card-date">Recebido em: <span>'+fmtDate(grad.date)+'</span></div>';
+      html += '<div class="grad-card-date">Recebido em: <span>'+fmtDayBR(grad.date)+'</span></div>';
       html += '<button class="grad-undo-btn" onclick="desfazerGrau('+n+')">&#8617; Desfazer graduacao</button>';
       html += '</div>';
     } else if(prevAvail){
-      // Active / pending card
-      var pct = Math.min(raw, 40);
       html += '<div class="grad-card pending">';
-      html += '<div class="grad-card-header">';
-      html += '<div class="grad-card-title">'+labels[n]+' — Em andamento</div>';
-      html += '<div class="grad-card-badge">&#9654;</div>';
-      html += '</div>';
+      html += '<div class="grad-card-header"><div class="grad-card-title">'+labels[n]+' — Em andamento</div><div class="grad-card-badge">&#9654;</div></div>';
       html += '<div class="grad-card-stats">';
       html += '<div class="grad-stat"><div class="grad-stat-val pend">'+raw+'</div><div class="grad-stat-lbl">Aulas realizadas</div></div>';
-      html += '<div class="grad-stat"><div class="grad-stat-val pend">'+Math.max(0,40-raw)+'</div><div class="grad-stat-lbl">Faltam</div></div>';
-      html += '<div class="grad-stat"><div class="grad-stat-val pend">40</div><div class="grad-stat-lbl">Meta</div></div>';
-      html += '</div>';
-      html += '</div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val pend">'+Math.max(0,APG-raw)+'</div><div class="grad-stat-lbl">Faltam</div></div>';
+      html += '<div class="grad-stat"><div class="grad-stat-val pend">'+APG+'</div><div class="grad-stat-lbl">Meta</div></div>';
+      html += '</div></div>';
     } else {
-      // Locked card
       html += '<div class="grad-card" style="opacity:0.3">';
-      html += '<div class="grad-card-header">';
-      html += '<div class="grad-card-title">'+labels[n]+'</div>';
-      html += '<div class="grad-card-badge">&#128274;</div>';
-      html += '</div>';
+      html += '<div class="grad-card-header"><div class="grad-card-title">'+labels[n]+'</div><div class="grad-card-badge">&#128274;</div></div>';
       html += '<div style="font-size:11px;color:var(--muted)">Aguardando graduacao anterior.</div>';
       html += '</div>';
     }
@@ -1687,30 +1908,49 @@ function fmtMY(d){
   return d.toLocaleDateString('pt-BR',{month:'short',year:'numeric'});
 }
 function renderTimeline(){
-  var apw=freq<0.5?0.5:freq;
-  var gp=gradeProgress();
-  var hoje=new Date();
-  var g1d=gp.g1>=40?hoje:addWeeks(hoje,(40-gp.g1)/apw);
-  var g2d=gp.g2>=40?hoje:addWeeks(g1d,(40-gp.g2)/apw);
-  var g3d=gp.g3>=40?hoje:addWeeks(g2d,(40-gp.g3)/apw);
-  var g4d=gp.g4>=40?hoje:addWeeks(g3d,(40-gp.g4)/apw);
-  var exd=addWeeks(g4d,4);
+  var apw  = freq<0.5?0.5:freq;
+  var gp   = gradeProgress();
+  var APG  = curAPG();
+  var hoje = new Date(); hoje.setHours(0,0,0,0);
+  var next = nextBelt(cfg.belt);
 
-  function gradDate(n){ return graduations[n] ? new Date(graduations[n].date) : null; }
-  function gradSub(n, fallback){ return graduations[n] ? ('Recebido em ' + (function(){ var MNAMES=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']; var p=graduations[n].date.split('-'); return parseInt(p[2],10)+' '+MNAMES[parseInt(p[1],10)-1]; })()) : fallback; }
+  var cards = [];
+  var prevD = hoje;
+  for(var n=1;n<=4;n++){
+    var g = graduations[n];
+    var rawN = gp['raw'+n];
+    var unlocked = (n===1) || !!graduations[n-1];
+    var d, sub, tag, cls;
+    if(g){
+      d = parseDay(g.date); sub = 'Recebido em ' + fmtDayBR(g.date); tag = '&#127941;'; cls = 'done-card';
+    } else {
+      var rem = Math.max(0, APG - rawN);
+      var base = prevD > hoje ? prevD : hoje;
+      d = rem === 0 ? base : addWeeks(base, rem/apw);
+      sub = unlocked ? ('Faltam ' + rem + ' sessoes') : (rem + ' sessoes');
+      tag = unlocked ? '&#9679;' : (n===4 ? '&#9733;' : '&#9675;');
+      cls = unlocked ? 'active-card' : '';
+    }
+    prevD = d;
+    cards.push({l:n+'º Grau', txt:fmtMY(d), sub:sub, tag:tag, cls:cls});
+  }
 
-  var cards=[
-    {l:'1 Grau', d:gradDate(1)||g1d, sub:graduations[1]?gradSub(1,''):'Faltam '+(40-gp.raw1)+' sessoes', tag:graduations[1]?'&#127941;':'&#9679;', cls:graduations[1]?'done-card':'active-card'},
-    {l:'2 Grau', d:gradDate(2)||g2d, sub:graduations[2]?gradSub(2,''):(40-gp.raw2)+' sessoes', tag:graduations[2]?'&#127941;':'&#9675;', cls:graduations[2]?'done-card':graduations[1]?'active-card':''},
-    {l:'3 Grau', d:gradDate(3)||g3d, sub:graduations[3]?gradSub(3,''):(40-gp.raw3)+' sessoes', tag:graduations[3]?'&#127941;':'&#9675;', cls:graduations[3]?'done-card':''},
-    {l:'4 Grau', d:gradDate(4)||g4d, sub:graduations[4]?gradSub(4,''):'Habilitado apos 4 grau', tag:graduations[4]?'&#127941;':'&#9733;', cls:graduations[4]?'done-card':''},
-    {l:'Exame Faixa Azul', d:exd, sub:'~4 sem. apos 4 grau', tag:'&#129303;', cls:'exam-card'}
-  ];
+  if(next){
+    var exd, exTxt, exSub;
+    if(examDate){
+      var dd = daysFromToday(examDate);
+      exd = parseDay(examDate); exTxt = fmtDayBR(examDate);
+      exSub = dd>0 ? ('Faltam ' + dd + ' dia' + (dd===1?'':'s')) : (dd===0 ? 'E hoje!' : 'Registre o resultado');
+    } else {
+      exd = addWeeks(prevD, 4); exTxt = fmtMY(exd); exSub = '~4 sem. apos o 4º grau';
+    }
+    cards.push({l:'Exame Faixa '+next.name, txt:exTxt, sub:exSub, tag:'&#129355;', cls:'exam-card'});
+  }
 
   var html='';
   for(var i=0;i<cards.length;i++){
-    var c=cards[i];
-    html+='<div class="timeline-card '+c.cls+'"><div class="tl-tag">'+c.tag+'</div><div class="tl-label">'+c.l+'</div><div class="tl-date">'+fmtMY(c.d)+'</div><div class="tl-sub">'+c.sub+'</div></div>';
+    var cd=cards[i];
+    html+='<div class="timeline-card '+cd.cls+'"><div class="tl-tag">'+cd.tag+'</div><div class="tl-label">'+cd.l+'</div><div class="tl-date">'+cd.txt+'</div><div class="tl-sub">'+cd.sub+'</div></div>';
   }
   document.getElementById('timeline-grid').innerHTML=html;
 
@@ -1940,6 +2180,7 @@ function renderRegras(){
 
 // ── STATS ─────────────────────────────────────────────────────────────────────
 function updateStats(){
+  renderTotalGeral();
   var allK=[];
   for(var bi=0;bi<BLOCKS.length;bi++){
     var bl=BLOCKS[bi];
@@ -2005,10 +2246,14 @@ function toggleRegra(i){ regrasOk[i]=!regrasOk[i]; saveState(); renderRegras(); 
 function setFreq(n){ freq=n; saveState(); renderTimeline(); updateAulas(); }
 function setFreqCustom(v){ var n=parseFloat(v); if(n>=1&&n<=7){ freq=n; var btns=document.querySelectorAll('.freq-btn'); for(var i=0;i<btns.length;i++) btns[i].classList.remove('active'); saveState(); renderTimeline(); updateAulas(); } }
 function resetAll(){
-  if(!confirm('Resetar tudo? Todo o progresso sera apagado.')) return;
-  reps={}; regrasOk={}; freq=4; trainDays={}; calGoToday();
-  try{ localStorage.removeItem(LS_KEY); }catch(e){}
-  renderAll(); setStatus('ok');
+  var nm=(cfg.athlete||'este usuario');
+  if(!confirm('Resetar os dados de "'+nm+'"?\n\nApaga: calendario, repeticoes, anotacoes, graduacoes, exames e historico de faixas deste usuario.\nMantem: nomes e descricoes das tecnicas, faixa atual e configuracoes.\n\nOs outros usuarios nao sao afetados. Faca um Backup antes se tiver duvida.')) return;
+  loadProfileData({
+    techNames:techNames, techDescs:techDescs, customTechs:customTechs,
+    cfg:{athlete:cfg.athlete, belt:cfg.belt, aulasPorGrau:cfg.aulasPorGrau}
+  });
+  calGoToday();
+  saveState(); renderAll(); setStatus('ok');
 }
 
 // ── EVOLUCAO ──────────────────────────────────────────────────────────────────
@@ -2198,8 +2443,19 @@ function svgEl(tag, attrs){
 // ── SHARED CHART HELPERS ──────────────────────────────────────────────────────
 var GRADE_COLORS=['#6b7280','#2563eb','#c9a84c','#22c55e'];
 
-function gradColorForCum(cum){
-  return cum<=40?GRADE_COLORS[0]:cum<=80?GRADE_COLORS[1]:cum<=120?GRADE_COLORS[2]:GRADE_COLORS[3];
+function gradColorForCum(cum, apg){
+  var a=apg||curAPG();
+  return cum<=a?GRADE_COLORS[0]:cum<=a*2?GRADE_COLORS[1]:cum<=a*3?GRADE_COLORS[2]:GRADE_COLORS[3];
+}
+// color of a month = grade band reached on its last training day (restarts at each belt change)
+function makeMonthColorFn(){
+  var cmap=buildCumulativeMap(), last={};
+  var ks=Object.keys(cmap).sort();
+  for(var i=0;i<ks.length;i++) last[ks[i].slice(0,7)]=ks[i];
+  return function(ym){
+    var lk=last[ym];
+    return lk ? gradColorForCum(cmap[lk], apgForDay(lk)) : GRADE_COLORS[0];
+  };
 }
 
 function drawBarChart(svgId, data, labelKey, sessionKey, cumAtEnd, chartH){
@@ -2261,6 +2517,7 @@ function drawBarChart(svgId, data, labelKey, sessionKey, cumAtEnd, chartH){
 // ── BARRAS MENSAIS ────────────────────────────────────────────────────────────
 function renderBarras(monthly){
   // build cumulative per month for color
+  var monthColorFn=makeMonthColorFn();
   var cumRun=0;
   var allMonthlyKeys=Object.keys(trainDays).filter(function(k){ return trainDays[k]>0; }).sort();
   var allMonthMap={};
@@ -2303,7 +2560,7 @@ function renderBarras(monthly){
     var x=padL+gap*i+(gap-barW)/2;
     var bH=cH*(m.sessions/maxS);
     var y=padT+cH-bH;
-    var col=gradColorForCum(cumByYm[m.ym]||0);
+    var col=monthColorFn(m.ym);
     svg.appendChild(svgEl('rect',{x:x,y:y,width:barW,height:bH,rx:'3',fill:col,opacity:'0.85'}));
     if(bH>12){
       var vl=svgEl('text',{x:x+barW/2,y:y-3,fill:'#e8e8f0','text-anchor':'middle','font-size':'8','font-family':'JetBrains Mono,monospace','font-weight':'600'});
@@ -2343,6 +2600,7 @@ function renderAcum(filteredKeys){
   }
   var W=svg.parentElement.clientWidth||svg.parentElement.offsetWidth||document.body.clientWidth||320; svg.setAttribute('width',W);
   var padL=32,padR=10,padT=14,padB=44;
+  var acumMonthColor=makeMonthColorFn();
   var chartW=W-padL-padR, cH=H-padT-padB;
 
   // ── Build full cumulative history to find baseCum ──
@@ -2381,7 +2639,12 @@ function renderAcum(filteredKeys){
   var totalDays=Math.max(1,(lastDate-firstDate)/86400000);
 
   function px(dateStr){ return padL+((new Date(dateStr)-firstDate)/86400000/totalDays)*chartW; }
-  function py(c){ return padT+cH-Math.min(c,160)/160*cH; }
+  // vertical scale grows with the data (a belt cycle can exceed 4 grades of sessions)
+  var cycleBase=cycleStart?sessionsBetween('',cycleStart):0;
+  var APGc=curAPG();
+  var yMax=Math.max(cycleBase+APGc*4, points[points.length-1].c);
+  yMax=Math.max(40, Math.ceil(yMax/40)*40);
+  function py(c){ return padT+cH-Math.min(c,yMax)/yMax*cH; }
 
   // ── Max monthly sessions for bar scaling ──
   var maxMon=0;
@@ -2398,10 +2661,10 @@ function renderAcum(filteredKeys){
 
   // ── Grade threshold lines (draw first, behind everything) ──
   var gLines=[
-    {v:40,c:GRADE_COLORS[0],l:'1g'},
-    {v:80,c:GRADE_COLORS[1],l:'2g'},
-    {v:120,c:GRADE_COLORS[2],l:'3g'},
-    {v:160,c:GRADE_COLORS[3],l:'4g'}
+    {v:cycleBase+APGc,c:GRADE_COLORS[0],l:'1g'},
+    {v:cycleBase+APGc*2,c:GRADE_COLORS[1],l:'2g'},
+    {v:cycleBase+APGc*3,c:GRADE_COLORS[2],l:'3g'},
+    {v:cycleBase+APGc*4,c:GRADE_COLORS[3],l:'4g'}
   ];
   for(var gi=0;gi<gLines.length;gi++){
     var gY=py(gLines[gi].v);
@@ -2430,12 +2693,7 @@ function renderAcum(filteredKeys){
       var bH=barMaxH*(m.sessions/maxMon);
       var bY=padT+cH-bH;
       // color by cumulative at end of month
-      var cumAtMonthEnd=baseCum;
-      for(var fi=0;fi<filteredKeys.length;fi++){
-        if(filteredKeys[fi].slice(0,7)<=m.ym) cumAtMonthEnd+=trainDays[filteredKeys[fi]]||0;
-        else break;
-      }
-      var barCol=gradColorForCum(cumAtMonthEnd);
+      var barCol=acumMonthColor(m.ym);
       svg.appendChild(svgEl('rect',{x:xLeft+1,y:bY,width:bW-2,height:bH,
         rx:'2',fill:barCol,opacity:'0.22'}));
       // thin top border on bar
@@ -2449,6 +2707,18 @@ function renderAcum(filteredKeys){
         bl.textContent=m.sessions; svg.appendChild(bl);
       }
     }
+  }
+
+  // ── Belt change markers ──
+  for(var bhi=0;bhi<beltHistory.length;bhi++){
+    var bh=beltHistory[bhi]; if(!bh.endDate) continue;
+    var bhx=px(bh.endDate);
+    if(bhx<padL||bhx>padL+chartW) continue;
+    var tb=getBelt(bh.toBelt||bh.belt);
+    var tbc=(tb.id==='preta')?'#9ca3af':tb.color;
+    svg.appendChild(svgEl('line',{x1:bhx,y1:padT,x2:bhx,y2:padT+cH,stroke:tbc,'stroke-width':'1.5','stroke-dasharray':'3,3',opacity:'0.85'}));
+    var bt=svgEl('text',{x:bhx+3,y:padT+9,fill:tbc,'font-size':'8','font-family':'JetBrains Mono,monospace','font-weight':'700'});
+    bt.textContent='\u2192 '+tb.name; svg.appendChild(bt);
   }
 
   // ── Cumulative curve area fill ──
@@ -2474,7 +2744,7 @@ function renderAcum(filteredKeys){
 
   // ── Y axis labels ──
   for(var yi=0;yi<=4;yi++){
-    var yv=yi*40;
+    var yv=Math.round(yMax*yi/4);
     var ypos=py(yv);
     if(ypos<padT-2||ypos>padT+cH+2) continue;
     var yl=svgEl('text',{x:padL-4,y:ypos+4,fill:'#6b6b7e',
@@ -2890,7 +3160,7 @@ var BACKUP_REMIND_DAYS = 7; // remind after 7 days without backup
 
 function checkBackupReminder(){
   // Don't show if no data at all
-  if(totalSessions()===0 && Object.keys(reps).length===0) return;
+  if(allSessions()===0 && Object.keys(reps).length===0) return;
 
   var lastBackup = null;
   try{ lastBackup = localStorage.getItem(BACKUP_TS_KEY); }catch(e){}
@@ -2901,7 +3171,7 @@ function checkBackupReminder(){
 
   if(!lastBackup){
     // Never backed up — show if there's meaningful data
-    if(totalSessions()>5){
+    if(allSessions()>5){
       if(msg) msg.textContent = 'Voce ainda nao fez nenhum backup. Seus dados podem ser perdidos ao atualizar.';
       banner.classList.add('show');
     }
@@ -2944,6 +3214,7 @@ function applyBeltTheme(){
   var e1=document.getElementById('header-belt-name');
   if(e1){ e1.textContent=nm; e1.style.color=b.color; e1.style.textShadow=b.glow?('0 0 18px '+b.color):'none'; }
   var e2=document.getElementById('belt-badge-label'); if(e2) e2.textContent=nm;
+  var e3=document.getElementById('aula-belt-label'); if(e3) e3.textContent='Faixa '+b.name;
   var badge=document.getElementById('belt-badge');
   if(badge){ badge.style.background=b.color; badge.style.color=b.text; }
 }
@@ -2959,6 +3230,10 @@ function applyHeaderConfig(){
     if(cfg.logo){ logo.src=cfg.logo; logo.classList.add('show'); }
     else { logo.src=''; logo.classList.remove('show'); }
   }
+  var un=document.getElementById('header-user-name');
+  if(un) un.textContent=(cfg.athlete||'Usuario');
+  var sl=document.getElementById('aula-sensei-label');
+  if(sl) sl.textContent=cfg.sensei?('o Sensei '+cfg.sensei):'o Sensei';
   applyBeltTheme();
 }
 
@@ -3023,28 +3298,51 @@ function saveSettings(){
   var se=document.getElementById('cfg-sensei');    if(se) cfg.sensei=se.value.trim();
   var ap=document.getElementById('cfg-aulas-por-grau');
   if(ap) cfg.aulasPorGrau=parseInt(ap.value)||40;
+  shared.school=cfg.school; shared.sensei=cfg.sensei;   // shared by every user
   saveState();
   applyHeaderConfig();
   closeSettings();
   updateAulas();
   renderTimeline();
+  renderExame();
   toast('Configuracoes salvas!');
 }
 
 // ── LOGO UPLOAD ───────────────────────────────────────────────────────────────
+// Downscale the logo so it does not eat the browser storage quota
+function compressLogo(dataUrl, cb){
+  var img=new Image();
+  img.onload=function(){
+    var w=img.width, h=img.height;
+    if(!w||!h){ cb(dataUrl); return; }
+    var sc=Math.min(1, 256/Math.max(w,h));
+    var cw=Math.max(1,Math.round(w*sc)), ch=Math.max(1,Math.round(h*sc));
+    try{
+      var cv=document.createElement('canvas'); cv.width=cw; cv.height=ch;
+      cv.getContext('2d').drawImage(img,0,0,cw,ch);
+      cb(cv.toDataURL('image/png'));
+    }catch(err){ cb(dataUrl); }
+  };
+  img.onerror=function(){ cb(dataUrl); };
+  img.src=dataUrl;
+}
+
 function handleLogoUpload(e){
   var file=e.target.files[0]; if(!file) return;
   var reader=new FileReader();
   reader.onload=function(ev){
-    cfg.logo=ev.target.result;
-    var lp=document.getElementById('logo-preview');
-    var lt=document.getElementById('logo-upload-text');
-    var lb=document.getElementById('logo-remove-btn');
-    if(lp){ lp.src=cfg.logo; lp.classList.add('show'); }
-    if(lt) lt.textContent='Toque para trocar a logo';
-    if(lb) lb.classList.add('show');
-    applyHeaderConfig();
-    saveState();
+    compressLogo(ev.target.result, function(small){
+      cfg.logo=small;
+      shared.logo=small;
+      var lp=document.getElementById('logo-preview');
+      var lt=document.getElementById('logo-upload-text');
+      var lb=document.getElementById('logo-remove-btn');
+      if(lp){ lp.src=cfg.logo; lp.classList.add('show'); }
+      if(lt) lt.textContent='Toque para trocar a logo';
+      if(lb) lb.classList.add('show');
+      applyHeaderConfig();
+      saveState();
+    });
   };
   reader.readAsDataURL(file);
   e.target.value='';
@@ -3125,6 +3423,372 @@ function repClickN(btn,n){
   addRep(bid,eg,ei,n);
 }
 
+// ── DATE HELPERS (local-time safe) ────────────────────────────────────────────
+var MONTHS_SHORT=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+function xel(id){ return document.getElementById(id); }
+function parseDay(s){ var p=(s||'').split('-'); return new Date(parseInt(p[0],10), parseInt(p[1],10)-1, parseInt(p[2],10)); }
+function daysFromToday(s){ var t=new Date(); t.setHours(0,0,0,0); return Math.round((parseDay(s).getTime()-t.getTime())/86400000); }
+function fmtDayBR(s){ if(!s) return '—'; var p=s.split('-'); return parseInt(p[2],10)+' '+MONTHS_SHORT[parseInt(p[1],10)-1]+'/'+p[0]; }
+
+// ── EXAM / BELT CYCLE ─────────────────────────────────────────────────────────
+function nextBelt(id){
+  for(var i=0;i<BELTS.length;i++){ if(BELTS[i].id===id) return BELTS[i+1]||null; }
+  return null;
+}
+function countTrainingDays(){
+  var n=0, k=Object.keys(trainDays);
+  for(var i=0;i<k.length;i++) if(trainDays[k[i]]>0) n++;
+  return n;
+}
+function repsGrandTotal(){
+  var s=0, k=Object.keys(reps);
+  for(var i=0;i<k.length;i++) s+=reps[k[i]]||0;
+  for(var j=0;j<beltHistory.length;j++) s+=beltHistory[j].repsTotal||0;
+  return s;
+}
+function firstTrainingDate(){
+  var k=Object.keys(trainDays).filter(function(x){ return trainDays[x]>0; }).sort();
+  return k.length?k[0]:'';
+}
+function beltChipHtml(id){
+  var b=getBelt(id);
+  return '<span class="exam-belt-chip" style="background:'+b.color+';color:'+b.text+'"><i></i>FAIXA '+b.name.toUpperCase()+'</span>';
+}
+function tgCard(cls,val,lbl){
+  return '<div class="tg-card '+cls+'"><div class="tg-val">'+val+'</div><div class="tg-lbl">'+lbl+'</div></div>';
+}
+
+function renderTotalGeral(){
+  var grid=xel('tg-grid'); if(!grid) return;
+  var ap=0, rp=0;
+  for(var i=0;i<examLog.length;i++){ if(examLog[i].result==='aprovado') ap++; else rp++; }
+  grid.innerHTML =
+    tgCard('main', allSessions(), 'Aulas<br>(total geral)') +
+    tgCard('', totalSessions(), 'Aulas na<br>faixa atual') +
+    tgCard('gold', repsGrandTotal(), 'Reps<br>(total geral)') +
+    tgCard('', countTrainingDays(), 'Dias<br>de treino') +
+    tgCard('green', beltHistory.length, 'Faixas<br>concluídas') +
+    tgCard('', ap+' / '+rp, 'Exames<br>aprov. / reprov.');
+}
+
+function renderExame(){
+  renderTotalGeral();
+  renderExamBox();
+  renderExamLists();
+}
+
+function renderExamBox(){
+  var box=xel('exam-box'); if(!box) return;
+  var next=nextBelt(cfg.belt);
+  var gcount=Object.keys(graduations).length;
+  var h='';
+  if(!next){
+    box.className='exam-box';
+    h='<div class="exam-belts">'+beltChipHtml(cfg.belt)+'</div>'+
+      '<div class="exam-info">Faixa preta: último nível do ciclo de faixas. Não há próximo exame de faixa para registrar.</div>';
+  } else {
+    var dd = examDate ? daysFromToday(examDate) : null;
+    var due = (examDate && dd<=0);
+    box.className='exam-box'+(due?' due':'');
+    h+='<div class="exam-belts">'+beltChipHtml(cfg.belt)+'<span class="exam-arrow">&#10140;</span>'+beltChipHtml(next.id)+'</div>';
+    h+='<div class="exam-info">Graus conquistados nesta faixa: <strong>'+gcount+'/4</strong> &middot; Aulas no ciclo: <strong>'+totalSessions()+'</strong>';
+    if(gcount<4) h+='<br>O exame costuma ser liberado a partir do 4º grau.';
+    h+='</div>';
+    h+='<label class="settings-label" for="exam-date-input">Data do exame de faixa</label>';
+    h+='<div class="exam-date-row"><input type="date" class="exam-date-input" id="exam-date-input" value="'+(examDate||'')+'">'+
+       '<button class="exam-mini-btn" onclick="saveExamDate()">Salvar data</button>'+
+       (examDate?'<button class="exam-mini-btn ghost" onclick="clearExamDate()">Limpar</button>':'')+'</div>';
+    if(examDate){
+      if(dd>0){
+        h+='<div class="exam-countdown">Faltam '+dd+' dia'+(dd===1?'':'s')+'<small>'+fmtDayBR(examDate)+'</small></div>';
+      } else if(dd===0){
+        h+='<div class="exam-countdown due">O exame é hoje!<small>'+fmtDayBR(examDate)+'</small></div>';
+      } else {
+        h+='<div class="exam-countdown due">Exame em '+fmtDayBR(examDate)+'<small>há '+(-dd)+' dia'+(dd===-1?'':'s')+'</small></div>';
+      }
+      if(dd<=0){
+        h+='<div class="exam-info" style="margin:10px 0 0">Como foi o exame? Registre o resultado:</div>';
+        h+='<div class="exam-result-row">'+
+           '<button class="exam-btn ok" onclick="openExamApproved()">&#9989; Aprovado — trocar de faixa</button>'+
+           '<button class="exam-btn bad" onclick="openExamFailed()">&#10060; Não aprovado</button></div>';
+      }
+    } else {
+      h+='<div style="margin-top:10px"><button class="exam-mini-btn ghost" onclick="openExamApproved()">Já fiz o exame: registrar aprovação</button> '+
+         '<button class="exam-mini-btn ghost" onclick="openExamFailed()">Registrar não aprovação</button></div>';
+    }
+  }
+  box.innerHTML=h;
+}
+
+function renderExamLists(){
+  var log=xel('exam-log-list');
+  if(log){
+    if(!examLog.length){
+      log.innerHTML='<div class="exam-empty">Nenhum exame registrado ainda.</div>';
+    } else {
+      var lh='';
+      var sorted=examLog.slice().sort(function(a,b){ return a.date<b.date?1:(a.date>b.date?-1:0); });
+      for(var i=0;i<sorted.length;i++){
+        var e=sorted[i];
+        var ok=(e.result==='aprovado');
+        var txt = ok ? ('<b>Aprovado</b> — Faixa '+getBelt(e.belt).name+' &#10140; Faixa '+getBelt(e.toBelt||e.belt).name)
+                     : ('<b>Não aprovado</b> — Faixa '+getBelt(e.belt).name);
+        lh+='<div class="exam-log-item"><div>'+(ok?'&#9989;':'&#10060;')+'</div><div class="eli-main"><div>'+txt+'</div>'+
+            '<div class="eli-date">'+fmtDayBR(e.date)+'</div>'+
+            (e.note?'<div class="eli-note">'+escHtml(e.note)+'</div>':'')+'</div></div>';
+      }
+      log.innerHTML=lh;
+    }
+  }
+  var bl=xel('belt-history-list');
+  if(bl){
+    if(!beltHistory.length){
+      bl.innerHTML='<div class="exam-empty">Nenhuma faixa arquivada ainda. Ao ser aprovado no exame e trocar de faixa, o ciclo anterior fica guardado aqui com todos os números.</div>';
+    } else {
+      var bh='';
+      for(var j=beltHistory.length-1;j>=0;j--){
+        var h=beltHistory[j];
+        var gl=[];
+        for(var n=1;n<=4;n++){ if(h.graduations && h.graduations[n]) gl.push(n+'º: '+fmtDayBR(h.graduations[n].date)); }
+        bh+='<div class="bh-card">'+
+          '<div class="bh-head">'+beltChipHtml(h.belt)+'<span class="exam-arrow">&#10140;</span>'+beltChipHtml(h.toBelt||h.belt)+
+          '<span class="bh-period">'+fmtDayBR(h.startDate)+' &rarr; '+fmtDayBR(h.endDate)+'</span></div>'+
+          '<div class="bh-stats">'+
+            '<div class="bh-stat"><b>'+(h.aulas||0)+'</b><span>Aulas</span></div>'+
+            '<div class="bh-stat"><b>'+(h.repsTotal||0)+'</b><span>Reps</span></div>'+
+            '<div class="bh-stat"><b>'+(h.tecnicasDominadas||0)+'</b><span>Dominadas</span></div>'+
+            '<div class="bh-stat"><b>'+(h.graus||0)+'/4</b><span>Graus</span></div>'+
+          '</div>'+
+          '<div class="bh-grads">'+(gl.length?('Graus: '+gl.join(' &middot; ')+'<br>'):'')+'Exame: '+fmtDayBR(h.endDate)+' &middot; '+(h.dias||0)+' dias de treino &middot; '+(h.aulasPorGrau||40)+' aulas/grau</div>'+
+          (j===beltHistory.length-1?'<button class="bh-undo" onclick="undoBeltChange()">&#8617; Desfazer troca de faixa</button>':'')+
+          '</div>';
+      }
+      bl.innerHTML=bh;
+    }
+  }
+}
+
+function saveExamDate(){
+  var inp=xel('exam-date-input');
+  var v=inp?inp.value:'';
+  if(!v){ toast('Selecione a data do exame.'); return; }
+  if(cycleStart && v<=cycleStart){ toast('A data deve ser posterior ao inicio da faixa atual.'); return; }
+  examDate=v;
+  saveState();
+  renderExame(); renderCalendar(); renderTimeline();
+  toast('Data do exame salva');
+}
+function clearExamDate(){
+  examDate='';
+  saveState();
+  renderExame(); renderCalendar(); renderTimeline();
+}
+
+var examModalMode='aprovado';
+function openExamApproved(){ openExamModal('aprovado'); }
+function openExamFailed(){ openExamModal('reprovado'); }
+
+function openExamModal(mode){
+  var next=nextBelt(cfg.belt);
+  if(mode==='aprovado' && !next){ toast('Voce ja esta na faixa preta.'); return; }
+  examModalMode=mode;
+  var today=todayKey();
+  var dEl=xel('exam-modal-date');
+  dEl.max=today;
+  dEl.value=(examDate && examDate<=today)?examDate:today;
+  xel('exam-modal-obs').value='';
+  xel('exam-modal-newdate').value='';
+  if(mode==='aprovado'){
+    xel('exam-modal-icon').innerHTML='&#127942;';
+    xel('exam-modal-title').textContent='Exame aprovado!';
+    xel('exam-modal-sub').textContent='Deseja trocar para a Faixa '+next.name+' e iniciar o novo ciclo?';
+    xel('exam-modal-hint').innerHTML='<strong>O que acontece:</strong> a Faixa '+getBelt(cfg.belt).name+' é arquivada (aulas, graus, repetições e exame ficam no histórico). As aulas e repetições zeram e o novo ciclo começa na data do exame. Calendário e anotações são mantidos.';
+    xel('exam-modal-apg').value=curAPG();
+    xel('exam-modal-approved').style.display='';
+    xel('exam-modal-failed').style.display='none';
+    xel('exam-modal-confirm').textContent='Trocar de faixa';
+  } else {
+    xel('exam-modal-icon').innerHTML='&#128170;';
+    xel('exam-modal-title').textContent='Exame não aprovado';
+    xel('exam-modal-sub').textContent='A faixa atual é mantida. Você pode agendar uma nova data agora.';
+    xel('exam-modal-approved').style.display='none';
+    xel('exam-modal-failed').style.display='';
+    xel('exam-modal-confirm').textContent='Registrar';
+  }
+  xel('exam-modal-overlay').classList.add('open');
+}
+function closeExamModal(){ xel('exam-modal-overlay').classList.remove('open'); }
+
+function archiveCurrentBelt(endDate, toBelt){
+  var rk=Object.keys(reps), rt=0, dom=0;
+  for(var i=0;i<rk.length;i++){ var v=reps[rk[i]]||0; rt+=v; if(v>=META) dom++; }
+  recomputeGradStats();
+  var days=0, tk=Object.keys(trainDays);
+  for(var j=0;j<tk.length;j++){
+    var k=tk[j];
+    if(trainDays[k]>0 && (!cycleStart || k>cycleStart) && k<=endDate) days++;
+  }
+  var gcopy=JSON.parse(JSON.stringify(graduations));
+  beltHistory.push({
+    belt:cfg.belt, toBelt:toBelt,
+    startDate:cycleStart||firstTrainingDate(), prevCycleStart:cycleStart, endDate:endDate,
+    aulas:sessionsBetween(cycleStart,endDate), dias:days, aulasPorGrau:curAPG(),
+    graduations:gcopy, graus:Object.keys(gcopy).length,
+    repsTotal:rt, tecnicasDominadas:dom,
+    reps:JSON.parse(JSON.stringify(reps)), regrasOk:JSON.parse(JSON.stringify(regrasOk))
+  });
+}
+
+function confirmExamResult(){
+  var date=xel('exam-modal-date').value;
+  var note=(xel('exam-modal-obs').value||'').trim();
+  if(!date){ toast('Informe a data do exame.'); return; }
+  if(date>todayKey()){ toast('A data do exame nao pode ser no futuro.'); return; }
+  if(examModalMode==='aprovado'){
+    var next=nextBelt(cfg.belt);
+    if(!next){ closeExamModal(); return; }
+    if(cycleStart && date<=cycleStart){ toast('A data deve ser posterior ao inicio da faixa atual ('+fmtDayBR(cycleStart)+').'); return; }
+    var apg=parseInt(xel('exam-modal-apg').value,10);
+    if(!(apg>=1 && apg<=200)){ toast('Informe as aulas por grau (1 a 200).'); return; }
+    var fromBelt=cfg.belt;
+    archiveCurrentBelt(date, next.id);
+    examLog.push({date:date, result:'aprovado', belt:fromBelt, toBelt:next.id, note:note});
+    cfg.belt=next.id; cfg.aulasPorGrau=apg; cycleStart=date;
+    reps={}; regrasOk={}; graduations={}; examDate='';
+    closeExamModal();
+    saveState();
+    renderAll();
+    toast('\uD83E\uDD4B Faixa '+next.name+'! Novo ciclo iniciado.');
+  } else {
+    var nd=xel('exam-modal-newdate').value||'';
+    if(nd && nd<=date){ toast('A nova data deve ser posterior a data do exame.'); return; }
+    examLog.push({date:date, result:'reprovado', belt:cfg.belt, note:note});
+    examDate=nd;
+    closeExamModal();
+    saveState();
+    renderAll();
+    toast(nd?('Nova data do exame: '+fmtDayBR(nd)):'Resultado registrado.');
+  }
+}
+
+function undoBeltChange(){
+  if(!beltHistory.length) return;
+  var e=beltHistory[beltHistory.length-1];
+  var cur=getBelt(cfg.belt).name, prev=getBelt(e.belt).name;
+  if(!confirm('Desfazer a troca para a Faixa '+cur+'?\n\nVoltam a Faixa '+prev+' com suas aulas, graus e repeticoes. Os graus e repeticoes registrados na Faixa '+cur+' desde a troca serao descartados. As aulas do calendario nao sao afetadas.')) return;
+  beltHistory.pop();
+  for(var i=examLog.length-1;i>=0;i--){
+    if(examLog[i].result==='aprovado' && examLog[i].belt===e.belt && examLog[i].date===e.endDate){ examLog.splice(i,1); break; }
+  }
+  cfg.belt=e.belt; cfg.aulasPorGrau=e.aulasPorGrau||40; cycleStart=e.prevCycleStart||'';
+  reps=e.reps||{}; regrasOk=e.regrasOk||{}; graduations=e.graduations||{}; examDate='';
+  saveState();
+  renderAll();
+  toast('Troca de faixa desfeita');
+}
+
+// ── PROFILES (multi-user) ─────────────────────────────────────────────────────
+function openProfiles(){
+  renderProfilesList();
+  xel('profiles-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeProfiles(){
+  xel('profiles-modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function renderProfilesList(){
+  commitActiveProfile();
+  var list=xel('prof-list'); if(!list) return;
+  var html='';
+  for(var i=0;i<profileOrder.length;i++){
+    var id=profileOrder[i];
+    var p=profilesStore[id]; if(!p) continue;
+    var pd=p.data||{};
+    var pb=getBelt((pd.cfg&&pd.cfg.belt)||'branca');
+    var ps=0, tk=Object.keys(pd.trainDays||{});
+    for(var j=0;j<tk.length;j++) ps+=pd.trainDays[tk[j]]||0;
+    var act=(id===activeId);
+    html+='<div class="prof-row'+(act?' active':'')+'">'+
+      '<div class="prof-main" data-id="'+id+'" onclick="profSwitch(this)">'+
+        '<div class="prof-name">'+escHtml(p.name||'Usuario')+'</div>'+
+        '<div class="prof-meta">Faixa '+pb.name+' &middot; '+ps+' aulas</div>'+
+      '</div>'+
+      (act?'<span class="prof-badge">ATIVO</span>':'')+
+      '<button class="prof-btn" data-id="'+id+'" onclick="profRename(this)" title="Renomear">&#9998;</button>'+
+      '<button class="prof-btn del" data-id="'+id+'" onclick="profDelete(this)" title="Excluir">&#10005;</button>'+
+    '</div>';
+  }
+  list.innerHTML=html;
+}
+
+function profSwitch(el){ switchProfile(el.getAttribute('data-id')); }
+
+function switchProfile(id){
+  if(!profilesStore[id]){ return; }
+  if(id===activeId){ closeProfiles(); return; }
+  commitActiveProfile();
+  activeId=id;
+  loadProfileData(profilesStore[id].data);
+  calGoToday();
+  saveState();
+  closeProfiles();
+  setFilterPeriod('all');
+  renderAll();
+  toast('Usuario: '+(cfg.athlete||'Usuario'));
+}
+
+function createProfile(){
+  var nEl=xel('new-prof-name'), bEl=xel('new-prof-belt');
+  var name=(nEl.value||'').trim();
+  if(!name){ toast('Informe o nome do usuario.'); return; }
+  commitActiveProfile();
+  var id=newProfileId();
+  profilesStore[id]={name:name, data:{
+    reps:{}, regrasOk:{}, freq:4, trainDays:{}, notes:{}, techNames:{}, techDescs:{}, customTechs:{}, graduations:{},
+    cfg:{athlete:name, belt:(bEl.value||'branca'), aulasPorGrau:40},
+    cycleStart:'', examDate:'', examLog:[], beltHistory:[]
+  }};
+  profileOrder.push(id);
+  nEl.value='';
+  switchProfile(id);
+}
+
+function profRename(el){
+  var id=el.getAttribute('data-id');
+  var p=profilesStore[id]; if(!p) return;
+  var nn=prompt('Novo nome do usuario:', p.name||'');
+  if(nn===null) return;
+  nn=nn.trim();
+  if(!nn){ toast('O nome nao pode ficar vazio.'); return; }
+  p.name=nn;
+  if(p.data){ p.data.cfg=p.data.cfg||{}; p.data.cfg.athlete=nn; }
+  if(id===activeId){ cfg.athlete=nn; }
+  saveState();
+  renderProfilesList();
+  applyHeaderConfig();
+}
+
+function profDelete(el){
+  var id=el.getAttribute('data-id');
+  var p=profilesStore[id]; if(!p) return;
+  if(profileOrder.length<=1){ toast('Mantenha ao menos um usuario.'); return; }
+  if(!confirm('Excluir o usuario "'+(p.name||'Usuario')+'"?\n\nTodo o calendario, tecnicas, anotacoes, graduacoes e exames dele serao apagados. Esta acao nao pode ser desfeita. Faca um Backup antes se tiver duvida.')) return;
+  delete profilesStore[id];
+  profileOrder=profileOrder.filter(function(x){ return x!==id; });
+  if(id===activeId){
+    activeId=profileOrder[0];
+    loadProfileData(profilesStore[activeId].data);
+    calGoToday();
+    setFilterPeriod('all');
+    renderAll();
+  }
+  saveState();
+  renderProfilesList();
+  toast('Usuario excluido');
+}
+
 function renderAll(){
   renderBlocks(); renderRegras(); updateStats(); updateAulas(); renderCalendar(); renderEvol(); updateFabBadge(); applyHeaderConfig();
 }
@@ -3138,7 +3802,8 @@ function toast(msg){
 }
 
 // ── PANEL DRAG & DROP REORDER ─────────────────────────────────────────────────
-var panelOrder = ['timeline','aula','cal','evol'];
+var DEFAULT_PANELS = ['timeline','aula','exame','cal','evol'];
+var panelOrder = DEFAULT_PANELS.slice();
 var dragSrcId  = null;
 var touchStartY = 0;
 var touchSrcId  = null;
@@ -3151,11 +3816,18 @@ function loadPanelOrder(){
     var saved = localStorage.getItem('sixblades_panel_order');
     if(saved){
       var arr = JSON.parse(saved);
-      // validate all ids present
-      var valid = arr.length===panelOrder.length && arr.every(function(id){
-        return panelOrder.indexOf(id)>=0;
-      });
-      if(valid) panelOrder = arr;
+      var valid = arr.length>0 && arr.every(function(id){ return DEFAULT_PANELS.indexOf(id)>=0; });
+      if(valid){
+        // panels introduced by newer versions are inserted after their default predecessor
+        for(var di=0; di<DEFAULT_PANELS.length; di++){
+          if(arr.indexOf(DEFAULT_PANELS[di])<0){
+            var prevId = di>0 ? DEFAULT_PANELS[di-1] : null;
+            var pos = prevId ? arr.indexOf(prevId) : -1;
+            arr.splice(pos+1, 0, DEFAULT_PANELS[di]);
+          }
+        }
+        panelOrder = arr;
+      }
     }
   }catch(e){}
 }
