@@ -60,6 +60,7 @@
   .timeline-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px}
   .section-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
   .section-title span{width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block}
+  .section-title .inl{width:auto;height:auto;background:none;border-radius:0;display:inline}   /* text inside a title, not the dot */
   .timeline-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:4px}
   .timeline-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;position:relative;overflow:hidden}
   .timeline-card.done-card{border-color:rgba(34,197,94,0.3);background:var(--green-dim)}
@@ -935,7 +936,7 @@
 <div class="draggable-panel" id="panel-aula" ondragover="panelDragOver(event,'aula')" ondrop="panelDrop(event,'aula')">
 <div class="panel-drag-handle" draggable="true" ontouchstart="touchDragStart(event,'aula')" ontouchend="touchDragEnd(event)" ontouchmove="touchDragMove(event)" ondragstart="panelDragStart(event,'aula')" ondragend="panelDragEnd(event)" title="Arraste para reordenar"><div class="panel-drag-handle-dots"><span><b></b><b></b></span><span><b></b><b></b></span><span><b></b><b></b></span></div></div>
 <div class="aula-section">
-  <div class="section-title"><span></span>Ciclo de Aulas — Graus na <span id="aula-belt-label" style="color:inherit">Faixa Branca</span></div>
+  <div class="section-title"><span></span><div>Ciclo de Aulas — Graus na <span id="aula-belt-label" class="inl">Faixa Branca</span></div></div>
 
   <div id="grade-rows"></div>
 
